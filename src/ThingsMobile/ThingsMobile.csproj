@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>
+      C# client library and examples for using ThingsMobile's API's to managed IoT SIM cards and data plans.
+    </Description>
+    <NoWarn>$(NoWarn);CA2235</NoWarn>
+  </PropertyGroup>
+
+</Project>

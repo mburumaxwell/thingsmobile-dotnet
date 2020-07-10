@@ -1,0 +1,19 @@
+﻿<Project>
+  <!-- Leave this file here, even if it's empty. It stops chaining imports. -->
+
+  <PropertyGroup>
+    <!-- Ensure changes to this file cause project rebuilds. -->
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <MicrosoftNETTestSdkPackageVersion>16.6.1</MicrosoftNETTestSdkPackageVersion>
+    <MoqPackageVersion>4.14.5</MoqPackageVersion>
+    <XunitPackageVersion>2.4.1</XunitPackageVersion>
+    <XunitAnalyzersPackageVersion>0.10.0</XunitAnalyzersPackageVersion>
+    <XunitRunnerVisualStudioPackageVersion>2.4.2</XunitRunnerVisualStudioPackageVersion>
+    <CoverletPackageVersion>1.3.0</CoverletPackageVersion>
+    <MicrosoftSourceLinkGitHubVersion>1.0.0</MicrosoftSourceLinkGitHubVersion>
+  </PropertyGroup>
+
+</Project>
