@@ -1,4 +1,4 @@
-﻿namespace ThingsMobile
+﻿namespace ThingsMobile.Models
 {
     /// <summary>
     /// The status of a SIM card

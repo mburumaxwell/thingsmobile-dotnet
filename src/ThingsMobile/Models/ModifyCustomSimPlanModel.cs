@@ -1,4 +1,4 @@
-﻿namespace ThingsMobile
+﻿namespace ThingsMobile.Models
 {
     /// <summary>
     /// Details required to modify a custom sim plan

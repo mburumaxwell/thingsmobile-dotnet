@@ -1,4 +1,4 @@
-﻿namespace ThingsMobile
+﻿namespace ThingsMobile.Models
 {
     /// <summary>
     /// A class containing details required to set sim thresholds

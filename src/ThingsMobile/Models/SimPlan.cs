@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Xml.Serialization;
 
-namespace ThingsMobile
+namespace ThingsMobile.Models
 {
     /// <summary>
     /// Details for a sim plan
