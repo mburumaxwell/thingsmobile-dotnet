@@ -385,7 +385,7 @@ namespace ThingsMobile
                 {
                     StatusCode = response.StatusCode,
                     IsSuccessful = response.IsSuccessStatusCode,
-                    ErrorResponse = error,
+                    Error = error,
                     Resource = resource,
                 };
             }

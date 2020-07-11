@@ -17,7 +17,7 @@ namespace ThingsMobile
         /// <summary>
         /// The error extracted from the response body
         /// </summary>
-        public ThingsMobileErrorResponse ErrorResponse { get; set; }
+        public ThingsMobileErrorResponse Error { get; set; }
 
         /// <summary>
         /// Status code response from the API
