@@ -67,7 +67,7 @@ namespace ThingsMobile
                 ["simBarcode"] = barcode
             };
 
-            var url = new Uri(options.BaseUrl, "/activateSim");
+            var url = new Uri(options.BaseUrl, "/services/business-apiactivateSim");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -84,7 +84,7 @@ namespace ThingsMobile
                 ["msisdn"] = msisdn,
             };
 
-            var url = new Uri(options.BaseUrl, "/blockSim");
+            var url = new Uri(options.BaseUrl, "/services/business-apiblockSim");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -106,7 +106,7 @@ namespace ThingsMobile
                 ["simAutoRechargeAmount"] = $"{modifyCustomSimPlan.AutoRechargeAmount}"
             };
 
-            var url = new Uri(options.BaseUrl, "/modifyCustomPlan");
+            var url = new Uri(options.BaseUrl, "/services/business-apimodifyCustomPlan");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -127,7 +127,7 @@ namespace ThingsMobile
                 ["simAutoRechargeAmount"] = $"{simPlanModel.AutoRechargeAmount}"
             };
 
-            var url = new Uri(options.BaseUrl, "/createCustomPlan");
+            var url = new Uri(options.BaseUrl, "/services/business-apicreateCustomPlan");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -138,7 +138,7 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<SimCollection>> ListSimCardsAsync(CancellationToken cancellationToken = default)
         {
-            var url = new Uri(options.BaseUrl, "/simList");
+            var url = new Uri(options.BaseUrl, "/services/business-apisimList");
             return await PostAsync<SimCollection>(url, cancellationToken);
         }
 
@@ -155,7 +155,7 @@ namespace ThingsMobile
                 ["msisdn"] = msisdn,
             };
 
-            var url = new Uri(options.BaseUrl, "/simStatus");
+            var url = new Uri(options.BaseUrl, "/services/business-apisimStatus");
             return await PostAsync<SimCollection>(url, parameters, cancellationToken);
         }
 
@@ -166,7 +166,7 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<Credit>> GetCreditDetailsAsync(CancellationToken cancellationToken = default)
         {
-            var url = new Uri(options.BaseUrl, "/credit");
+            var url = new Uri(options.BaseUrl, "/services/business-apicredit");
             return await PostAsync<Credit>(url, cancellationToken);
         }
 
@@ -177,7 +177,7 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<SimPlanCollection>> GetSimPlansAsync(CancellationToken cancellationToken = default)
         {
-            var url = new Uri(options.BaseUrl, "/customPlanList");
+            var url = new Uri(options.BaseUrl, "/services/business-apicustomPlanList");
             return await PostAsync<SimPlanCollection>(url, cancellationToken);
         }
 
@@ -201,7 +201,7 @@ namespace ThingsMobile
                 ["blockSim"] = blockSimAfterExpiry ? "1" : "0"
             };
 
-            var url = new Uri(options.BaseUrl, "/setupSimExpirationDate");
+            var url = new Uri(options.BaseUrl, "/services/business-apisetupSimExpirationDate");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -225,7 +225,7 @@ namespace ThingsMobile
                 ["blockSimTotal"] = threshold.BlockSimTotal ? "1" : "0"
             };
 
-            var url = new Uri(options.BaseUrl, "/setupSimTrafficThreshold");
+            var url = new Uri(options.BaseUrl, "/services/business-apisetupSimTrafficThreshold");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -243,7 +243,7 @@ namespace ThingsMobile
                 ["msisdn"] = msisdn,
             };
 
-            var url = new Uri(options.BaseUrl, "/unblockSim");
+            var url = new Uri(options.BaseUrl, "/services/business-apiunblockSim");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -264,7 +264,7 @@ namespace ThingsMobile
                 ["name"] = name
             };
 
-            var url = new Uri(options.BaseUrl, "/updateSimName");
+            var url = new Uri(options.BaseUrl, "/services/business-apiupdateSimName");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -285,7 +285,7 @@ namespace ThingsMobile
                 ["message"] = message
             };
 
-            var url = new Uri(options.BaseUrl, "/sendSms");
+            var url = new Uri(options.BaseUrl, "/services/business-apisendSms");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -306,7 +306,7 @@ namespace ThingsMobile
                 ["customPlanId"] = customPlanId
             };
 
-            var url = new Uri(options.BaseUrl, "/changeSimPlan");
+            var url = new Uri(options.BaseUrl, "/services/business-apichangeSimPlan");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
@@ -327,7 +327,7 @@ namespace ThingsMobile
                 ["tag"] = tag
             };
 
-            var url = new Uri(options.BaseUrl, "/updateSimTag");
+            var url = new Uri(options.BaseUrl, "/services/business-apiupdateSimTag");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 

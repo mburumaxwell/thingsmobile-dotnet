@@ -20,6 +20,6 @@ namespace ThingsMobile
         /// <summary>
         /// The base URL for the ThingsMobile APIs
         /// </summary>
-        public Uri BaseUrl { get; set; } = new Uri("https://www.thingsmobile.com/services/business-api");
+        public Uri BaseUrl { get; set; } = new Uri("https://www.thingsmobile.com/");
     }
 }
