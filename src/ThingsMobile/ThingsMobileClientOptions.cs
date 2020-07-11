@@ -1,4 +1,6 @@
-﻿namespace ThingsMobile
+﻿using System;
+
+namespace ThingsMobile
 {
     /// <summary>
     /// Options for configuring the <see cref="ThingsMobileClient"/>
@@ -18,6 +20,6 @@
         /// <summary>
         /// The base URL for the ThingsMobile APIs
         /// </summary>
-        public string BaseUrl { get; set; } = "https://www.thingsmobile.com/services/business-api";
+        public Uri BaseUrl { get; set; } = new Uri("https://www.thingsmobile.com/services/business-api");
     }
 }

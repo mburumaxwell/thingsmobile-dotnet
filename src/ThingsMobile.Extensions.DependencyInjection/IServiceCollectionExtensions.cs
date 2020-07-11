@@ -49,7 +49,7 @@ namespace Microsoft.Extensions.DependencyInjection
                          throw new ArgumentNullException(nameof(o.Token));
                      }
 
-                     if (string.IsNullOrWhiteSpace(o.BaseUrl))
+                     if (o.BaseUrl == null)
                      {
                          throw new ArgumentNullException(nameof(o.BaseUrl));
                      }
@@ -81,7 +81,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection"/> in which to register the services.</param>
         /// <param name="configuration">A configuration object with values for a <see cref="ThingsMobileClientOptions"/>.</param>
         /// <returns>An <see cref="IHttpClientBuilder" /> that can be used to configure the client.</returns>
-        public static IHttpClientBuilder AddThingsMobile(this IServiceCollection services, IConfiguration configuration) 
+        public static IHttpClientBuilder AddThingsMobile(this IServiceCollection services, IConfiguration configuration)
         {
             return services.AddThingsMobile(configuration, null);
         }

@@ -37,7 +37,7 @@ namespace ThingsMobile
                 throw new ArgumentNullException(nameof(options.Token));
             }
 
-            if (string.IsNullOrWhiteSpace(options.BaseUrl = options.BaseUrl))
+            if (options.BaseUrl == null)
             {
                 throw new ArgumentNullException(nameof(options.BaseUrl));
             }
