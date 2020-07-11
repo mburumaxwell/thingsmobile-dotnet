@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using ThingsMobile.Models;
@@ -48,8 +49,11 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="msisdn">MSISDN of the sim card</param>
         /// <param name="barcode">Sim barcode number (19/20 digits long)</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> ActivateSimCardAsync(string msisdn, string barcode)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> ActivateSimCardAsync(string msisdn,
+                                                                                        string barcode,
+                                                                                        CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -65,15 +69,16 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
         /// Block a sim card
         /// </summary>
         /// <param name="msisdn">MSISDN of the sim card</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> BlockSimCardAsync(string msisdn)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> BlockSimCardAsync(string msisdn, CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -88,15 +93,17 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
         /// Modify an existing sim plan
         /// </summary>
         /// <param name="modifyCustomSimPlan">Details for the sim plan modifications</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> ModifyCustomSimPlanAsync(ModifyCustomSimPlanModel modifyCustomSimPlan)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> ModifyCustomSimPlanAsync(ModifyCustomSimPlanModel modifyCustomSimPlan,
+                                                                                            CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -115,15 +122,17 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
         /// Create a custom sim plan
         /// </summary>
         /// <param name="simPlanModel">Details of the custom sim plan</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> CreateCustomSimPlanAsync(AddCustomSimPlanModel simPlanModel)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> CreateCustomSimPlanAsync(AddCustomSimPlanModel simPlanModel,
+                                                                                            CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -141,14 +150,15 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
         /// Gets all sim cards
         /// </summary>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> ListSimCardsAsync()
+        public async Task<ThingsMobileResponse<SimCollection>> ListSimCardsAsync(CancellationToken cancellationToken = default)
         {
             var formContent = CreateFormUrlContent();
 
@@ -158,15 +168,16 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<SimCollection>(request);
+            return await SendAsync<SimCollection>(request, cancellationToken);
         }
 
         /// <summary>
         /// Get a sim card
         /// </summary>
         /// <param name="msisdn">MSISDN of the sim card</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string msisdn)
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string msisdn, CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -181,14 +192,15 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<SimCollection>(request);
+            return await SendAsync<SimCollection>(request, cancellationToken);
         }
 
         /// <summary>
         /// Retrieve credit details for the user
         /// </summary>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<Credit>> GetCreditDetailsAsync()
+        public async Task<ThingsMobileResponse<Credit>> GetCreditDetailsAsync(CancellationToken cancellationToken = default)
         {
             var formContent = CreateFormUrlContent();
 
@@ -198,14 +210,15 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<Credit>(request);
+            return await SendAsync<Credit>(request, cancellationToken);
         }
 
         /// <summary>
         /// Get custom sim plan lists
         /// </summary>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimPlanCollection>> GetSimPlansAsync()
+        public async Task<ThingsMobileResponse<SimPlanCollection>> GetSimPlansAsync(CancellationToken cancellationToken = default)
         {
             var formContent = CreateFormUrlContent();
             var url = new Uri(options.BaseUrl, "/customPlanList");
@@ -214,7 +227,7 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<SimPlanCollection>(request);
+            return await SendAsync<SimPlanCollection>(request, cancellationToken);
         }
 
         /// <summary>
@@ -223,8 +236,12 @@ namespace ThingsMobile
         /// <param name="msisdn">MSISDN for the SIM card</param>
         /// <param name="expiryDateString">Date which the sim card expires. Format (yyyy-MM-dd)</param>
         /// <param name="blockSimAfterExpiry">Whether to  block the sim card after expiry</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimExpiryDateAsync(string msisdn, string expiryDateString, bool blockSimAfterExpiry)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimExpiryDateAsync(string msisdn,
+                                                                                         string expiryDateString,
+                                                                                         bool blockSimAfterExpiry,
+                                                                                         CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -241,7 +258,7 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +266,9 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="threshold">Details of the thresholds to be set</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimThresholdsAsync(SimThreshold threshold)
+        /// <param name="cancellationToken">The token for cancelling the task</param>
+        public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimThresholdsAsync(SimThreshold threshold,
+                                                                                         CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -270,15 +289,17 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
         /// Unblock a sim card
         /// </summary>
         /// <param name="msisdn">MSISDN of the sim card</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> UnblockSimCardAsync(string msisdn)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> UnblockSimCardAsync(string msisdn,
+                                                                                       CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -293,7 +314,7 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
@@ -301,8 +322,11 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="msisdn">MSISDN for the sim card</param>
         /// <param name="name">Name of the sim card</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimNameAsync(string msisdn, string name)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimNameAsync(string msisdn,
+                                                                                      string name,
+                                                                                      CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -318,7 +342,7 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
@@ -326,8 +350,11 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="msisdn">MSISDN for the sim card</param>
         /// <param name="message">sms message (160 characters maximum)</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> SendSmsToSimAsync(string msisdn, string message)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> SendSmsToSimAsync(string msisdn,
+                                                                                     string message,
+                                                                                     CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -343,7 +370,7 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
@@ -351,8 +378,11 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="msisdn">MSISDN for the sim card</param>
         /// <param name="customPlanId">Unique identifier for the sim plan</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> ChangeSimPlanAsync(string msisdn, string customPlanId)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> ChangeSimPlanAsync(string msisdn,
+                                                                                      string customPlanId,
+                                                                                      CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -368,7 +398,7 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
@@ -376,8 +406,11 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="msisdn">MSISDN for the SIM card</param>
         /// <param name="tag">Tag for the SIM card</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimTagAsync(string msisdn, string tag)
+        public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimTagAsync(string msisdn,
+                                                                                     string tag,
+                                                                                     CancellationToken cancellationToken = default)
         {
             var dict = new Dictionary<string, string>
             {
@@ -393,7 +426,7 @@ namespace ThingsMobile
                 Content = formContent
             };
 
-            return await SendAsync<BaseResponseModel>(request);
+            return await SendAsync<BaseResponseModel>(request, cancellationToken);
         }
 
         /// <summary>
@@ -401,10 +434,12 @@ namespace ThingsMobile
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="request"></param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        private async Task<ThingsMobileResponse<T>> SendAsync<T>(HttpRequestMessage request) where T : BaseResponseModel
+        private async Task<ThingsMobileResponse<T>> SendAsync<T>(HttpRequestMessage request, CancellationToken cancellationToken = default)
+            where T : BaseResponseModel
         {
-            using (var response = await httpClient.SendAsync(request))
+            using (var response = await httpClient.SendAsync(request, cancellationToken))
             using (var stream = await response.Content.ReadAsStreamAsync())
             {
                 var result = new ThingsMobileResponse<T>
