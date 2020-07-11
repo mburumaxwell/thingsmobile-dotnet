@@ -47,7 +47,7 @@ namespace ThingsMobile
             // populate the User-Agent header
             var productVersion = typeof(ThingsMobileClient).Assembly.GetName().Version.ToString();
             var userAgent = new ProductInfoHeaderValue("thingsmobile-dotnet", productVersion);
-            httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
+            this.httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
         }
 
         /// <summary>
