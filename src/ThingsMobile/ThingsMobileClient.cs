@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
@@ -42,6 +43,11 @@ namespace ThingsMobile
             {
                 throw new ArgumentNullException(nameof(options.BaseUrl));
             }
+
+            // populate the User-Agent header
+            var productVersion = typeof(ThingsMobileClient).Assembly.GetName().Version.ToString();
+            var userAgent = new ProductInfoHeaderValue("thingsmobile-dotnet", productVersion);
+            httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
         }
 
         /// <summary>
