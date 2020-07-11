@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile.Extensions.Dep
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleSimple", "examples\ExampleSimple\ExampleSimple.csproj", "{5CDB558E-21A2-4608-AA41-8A64B71FE2C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleInjection", "examples\ExampleInjection\ExampleInjection.csproj", "{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleDependencyInjection", "examples\ExampleDependencyInjection\ExampleDependencyInjection.csproj", "{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{27D2C1B6-486B-4EE8-B0C2-41385E33C09D}"
 	ProjectSection(SolutionItems) = preProject
