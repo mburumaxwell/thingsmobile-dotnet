@@ -55,21 +55,14 @@ namespace ThingsMobile
                                                                                         string barcode,
                                                                                         CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
                 ["simBarcode"] = barcode
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/activateSim");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -80,20 +73,13 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<BaseResponseModel>> BlockSimCardAsync(string msisdn, CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/blockSim");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -105,7 +91,7 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<BaseResponseModel>> ModifyCustomSimPlanAsync(ModifyCustomSimPlanModel modifyCustomSimPlan,
                                                                                             CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["Id"] = modifyCustomSimPlan.Id,
                 ["name"] = modifyCustomSimPlan.Name,
@@ -114,15 +100,8 @@ namespace ThingsMobile
                 ["simAutoRechargeAmount"] = $"{modifyCustomSimPlan.AutoRechargeAmount}"
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/modifyCustomPlan");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -134,7 +113,7 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<BaseResponseModel>> CreateCustomSimPlanAsync(AddCustomSimPlanModel simPlanModel,
                                                                                             CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["name"] = simPlanModel.Name,
                 ["simAutoRechargeEnabled"] = $"{simPlanModel.EnableAutoRecharge}",
@@ -142,15 +121,8 @@ namespace ThingsMobile
                 ["simAutoRechargeAmount"] = $"{simPlanModel.AutoRechargeAmount}"
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/createCustomPlan");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -160,15 +132,8 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<SimCollection>> ListSimCardsAsync(CancellationToken cancellationToken = default)
         {
-            var formContent = CreateFormUrlContent();
-
             var url = new Uri(options.BaseUrl, "/simList");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<SimCollection>(request, cancellationToken);
+            return await PostAsync<SimCollection>(url, cancellationToken);
         }
 
         /// <summary>
@@ -179,20 +144,13 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string msisdn, CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/simStatus");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<SimCollection>(request, cancellationToken);
+            return await PostAsync<SimCollection>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -202,15 +160,8 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<Credit>> GetCreditDetailsAsync(CancellationToken cancellationToken = default)
         {
-            var formContent = CreateFormUrlContent();
-
             var url = new Uri(options.BaseUrl, "/credit");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<Credit>(request, cancellationToken);
+            return await PostAsync<Credit>(url, cancellationToken);
         }
 
         /// <summary>
@@ -220,14 +171,8 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<SimPlanCollection>> GetSimPlansAsync(CancellationToken cancellationToken = default)
         {
-            var formContent = CreateFormUrlContent();
             var url = new Uri(options.BaseUrl, "/customPlanList");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<SimPlanCollection>(request, cancellationToken);
+            return await PostAsync<SimPlanCollection>(url, cancellationToken);
         }
 
         /// <summary>
@@ -243,22 +188,15 @@ namespace ThingsMobile
                                                                                          bool blockSimAfterExpiry,
                                                                                          CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
                 ["expirationDate"] = expiryDateString,
                 ["blockSim"] = blockSimAfterExpiry ? "1" : "0"
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/setupSimExpirationDate");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -270,7 +208,7 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimThresholdsAsync(SimThreshold threshold,
                                                                                          CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = threshold.MSISDN,
                 ["dailyLimit"] = $"{threshold.DailyLimit}",
@@ -281,15 +219,8 @@ namespace ThingsMobile
                 ["blockSimTotal"] = threshold.BlockSimTotal ? "1" : "0"
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/setupSimTrafficThreshold");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -301,20 +232,13 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<BaseResponseModel>> UnblockSimCardAsync(string msisdn,
                                                                                        CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/unblockSim");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -328,21 +252,14 @@ namespace ThingsMobile
                                                                                       string name,
                                                                                       CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
                 ["name"] = name
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/updateSimName");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -356,21 +273,14 @@ namespace ThingsMobile
                                                                                      string message,
                                                                                      CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
                 ["message"] = message
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/sendSms");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -384,21 +294,14 @@ namespace ThingsMobile
                                                                                       string customPlanId,
                                                                                       CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
                 ["customPlanId"] = customPlanId
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/changeSimPlan");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
@@ -412,78 +315,79 @@ namespace ThingsMobile
                                                                                      string tag,
                                                                                      CancellationToken cancellationToken = default)
         {
-            var dict = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string>
             {
                 ["msisdn"] = msisdn,
                 ["tag"] = tag
             };
 
-            var formContent = CreateFormUrlContent(dict);
-
             var url = new Uri(options.BaseUrl, "/updateSimTag");
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
-            {
-                Content = formContent
-            };
-
-            return await SendAsync<BaseResponseModel>(request, cancellationToken);
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 
         /// <summary>
         /// Send actual request to things mobile
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="request"></param>
+        /// <param name="url">The url to make the request to</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        private async Task<ThingsMobileResponse<T>> SendAsync<T>(HttpRequestMessage request, CancellationToken cancellationToken = default)
+        private Task<ThingsMobileResponse<T>> PostAsync<T>(Uri url, CancellationToken cancellationToken = default)
             where T : BaseResponseModel
         {
-            using (var response = await httpClient.SendAsync(request, cancellationToken))
-            using (var stream = await response.Content.ReadAsStreamAsync())
-            {
-                var result = new ThingsMobileResponse<T>
-                {
-                    StatusCode = response.StatusCode,
-                    IsSuccessful = response.IsSuccessStatusCode
-                };
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    var error = (ThingsMobileErrorResponse)errorSerializer.Deserialize(stream);
-                    result.ErrorResponse = error;
-                }
-                else
-                {
-                    var serializer = new XmlSerializer(typeof(T));
-                    result.Resource = (T)serializer.Deserialize(stream);
-                }
-
-                return result;
-            }
+            return PostAsync<T>(url, null, cancellationToken);
         }
 
         /// <summary>
-        /// Create form url content
+        /// Send actual request to things mobile
         /// </summary>
-        /// <param name="inputs">Items to be inserted into the form</param>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="url">The url to make the request to</param>
+        /// <param name="parameters">The body parameters</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        private FormUrlEncodedContent CreateFormUrlContent(IDictionary<string, string> inputs = null)
+        private async Task<ThingsMobileResponse<T>> PostAsync<T>(Uri url, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+            where T : BaseResponseModel
         {
-            var userNamePair = new KeyValuePair<string, string>("username", options.Username);
-            var tokenPair = new KeyValuePair<string, string>("token", options.Token);
+            // ensure there are parameters
+            parameters = parameters ?? new Dictionary<string, string>();
 
-            if (inputs == null)
-            {
-                return new FormUrlEncodedContent(new[] { userNamePair, tokenPair });
-            }
-            else
-            {
-                // add the common form contents
-                inputs.Add(userNamePair);
-                inputs.Add(tokenPair);
+            // add authentication parameters
+            parameters.Add("username", options.Username);
+            parameters.Add("token", options.Token);
 
-                return new FormUrlEncodedContent(inputs);
+            // form the content and request
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            {
+                Content = new FormUrlEncodedContent(parameters)
+            };
+
+            // send the request
+            var response = await httpClient.SendAsync(request, cancellationToken);
+
+            // extract the response
+            using (var stream = await response.Content.ReadAsStreamAsync())
+            {
+                var error = default(ThingsMobileErrorResponse);
+                var resource = default(T);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var serializer = new XmlSerializer(typeof(T));
+                    resource = (T)serializer.Deserialize(stream);
+                }
+                else
+                {
+                    error = (ThingsMobileErrorResponse)errorSerializer.Deserialize(stream);
+                }
+
+                return new ThingsMobileResponse<T>
+                {
+                    StatusCode = response.StatusCode,
+                    IsSuccessful = response.IsSuccessStatusCode,
+                    ErrorResponse = error,
+                    Resource = resource,
+                };
             }
         }
     }
