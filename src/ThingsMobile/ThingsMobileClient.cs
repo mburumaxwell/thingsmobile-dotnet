@@ -59,7 +59,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/activateSim")
+            var url = new Uri(options.BaseUrl, "/activateSim");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -81,7 +82,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/blockSim")
+            var url = new Uri(options.BaseUrl, "/blockSim");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -107,7 +109,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/modifyCustomPlan")
+            var url = new Uri(options.BaseUrl, "/modifyCustomPlan");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -132,7 +135,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/createCustomPlan")
+            var url = new Uri(options.BaseUrl, "/createCustomPlan");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -148,7 +152,8 @@ namespace ThingsMobile
         {
             var formContent = CreateFormUrlContent();
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/simList")
+            var url = new Uri(options.BaseUrl, "/simList");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -170,7 +175,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/simStatus")
+            var url = new Uri(options.BaseUrl, "/simStatus");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -186,7 +192,8 @@ namespace ThingsMobile
         {
             var formContent = CreateFormUrlContent();
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/credit")
+            var url = new Uri(options.BaseUrl, "/credit");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -201,7 +208,8 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<SimPlanCollection>> GetSimPlansAsync()
         {
             var formContent = CreateFormUrlContent();
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/customPlanList")
+            var url = new Uri(options.BaseUrl, "/customPlanList");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -227,7 +235,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/setupSimExpirationDate")
+            var url = new Uri(options.BaseUrl, "/setupSimExpirationDate");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -255,7 +264,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/setupSimTrafficThreshold")
+            var url = new Uri(options.BaseUrl, "/setupSimTrafficThreshold");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -277,7 +287,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/unblockSim")
+            var url = new Uri(options.BaseUrl, "/unblockSim");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -301,7 +312,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/updateSimName")
+            var url = new Uri(options.BaseUrl, "/updateSimName");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -325,7 +337,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/sendSms")
+            var url = new Uri(options.BaseUrl, "/sendSms");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -349,7 +362,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/changeSimPlan")
+            var url = new Uri(options.BaseUrl, "/changeSimPlan");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
@@ -373,7 +387,8 @@ namespace ThingsMobile
 
             var formContent = CreateFormUrlContent(dict);
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{options.BaseUrl}/updateSimTag")
+            var url = new Uri(options.BaseUrl, "/updateSimTag");
+            var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = formContent
             };
