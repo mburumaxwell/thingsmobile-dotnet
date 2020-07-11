@@ -75,6 +75,7 @@ stages:
 
 - stage: Release
   dependsOn: Build
+  condition: and(succeeded(), not(startsWith(variables['Build.SourceBranch'], 'refs/pull/')))
   jobs:
     - deployment: NugetOrg
       environment: NugetOrg
