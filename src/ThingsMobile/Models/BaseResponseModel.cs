@@ -4,11 +4,11 @@ using System.Xml.Serialization;
 namespace ThingsMobile.Models
 {
     /// <summary>
-    /// Successful response
+    /// The base response model
     /// </summary>
     [Serializable]
     [XmlRoot("result")]
-    public class BaseThingsMobileResponse
+    public class BaseResponseModel
     {
         /// <summary>
         /// Boolean indicating success of the request

@@ -8,7 +8,7 @@ namespace ThingsMobile.Models
     /// </summary>
     [Serializable]
     [XmlRoot("result")]
-    public class Credit : BaseThingsMobileResponse
+    public class Credit : BaseResponseModel
     {
         /// <summary>
         /// The recharge history

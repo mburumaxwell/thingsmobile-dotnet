@@ -7,7 +7,7 @@ namespace ThingsMobile
     /// Things Mobile API Response
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class ThingsMobileResponse<T> where T : BaseThingsMobileResponse
+    public class ThingsMobileResponse<T> where T : BaseResponseModel
     {
         /// <summary>
         /// The resource extracted from the response body

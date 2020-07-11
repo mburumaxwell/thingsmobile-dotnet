@@ -8,7 +8,7 @@ namespace ThingsMobile.Models
     /// </summary>
     [Serializable]
     [XmlRoot("result")]
-    public class SimPlanCollection : BaseThingsMobileResponse
+    public class SimPlanCollection : BaseResponseModel
     {
         /// <summary>
         /// Sim plans

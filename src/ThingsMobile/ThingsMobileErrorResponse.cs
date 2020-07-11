@@ -9,7 +9,7 @@ namespace ThingsMobile
     /// </summary>
     [Serializable]
     [XmlRoot("result")]
-    public class ThingsMobileErrorResponse : BaseThingsMobileResponse
+    public class ThingsMobileErrorResponse : BaseResponseModel
     {
         /// <summary>
         /// Numeric error code on Things Mobile API
