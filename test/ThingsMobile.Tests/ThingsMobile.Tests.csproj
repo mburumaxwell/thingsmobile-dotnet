@@ -1,6 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <EmbeddedResource Include="Samples\error.xml" />
+    <EmbeddedResource Include="Samples\simListResponse.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\ThingsMobile\ThingsMobile.csproj" />
   </ItemGroup>
 

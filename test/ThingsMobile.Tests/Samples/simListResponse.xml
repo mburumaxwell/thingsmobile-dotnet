@@ -1,0 +1,39 @@
+﻿<result>
+    <done>true</done>
+    <sims>
+        <sim>
+            <activationDate>2018-02-07 15:52:49</activationDate>
+            <balance>30</balance>
+            <blockSimAfterExpirationDate>1</blockSimAfterExpirationDate>
+            <blockSimDaily>1</blockSimDaily>
+            <blockSimMonthly>1</blockSimMonthly>
+            <blockSimTotal>1</blockSimTotal>
+            <dailyTraffic>123</dailyTraffic>
+            <dailyTrafficThreshold>1000000</dailyTrafficThreshold>
+            <expirationDate>2018-02-20 00:00:00</expirationDate>
+            <iccid>8944501312167518236</iccid>
+            <lastConnectionDate></lastConnectionDate>
+            <monthlyTraffic>1234</monthlyTraffic>
+            <monthlyTrafficThreshold>2000000</monthlyTrafficThreshold>
+            <msisdn>447937557899</msisdn>
+            <name>name</name>
+            <plan>default</plan>
+            <status>active</status>
+            <tag>tag</tag>
+            <totalTraffic>0</totalTraffic>
+            <totalTrafficThreshold>3000000</totalTrafficThreshold>
+            <type>AllInOne Sim</type>
+            <cdrs>
+                <cdr>
+                    <cdrImsi>123456</cdrImsi>
+                    <cdrDateStart>2017-01-20 12:45:00</cdrDateStart>
+                    <cdrDateStop>2017-01-20 12:50:00</cdrDateStop>
+                    <cdrNetwork>Zone 1</cdrNetwork>
+                    <cdrCountry>Zone 1</cdrCountry>
+                    <cdrTraffic>123456</cdrTraffic>
+                    <cdrOperator> ITAWI</cdrOperator>
+                </cdr>
+            </cdrs>
+        </sim>
+    </sims>
+</result>
