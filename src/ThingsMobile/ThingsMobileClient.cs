@@ -136,6 +136,7 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
+        [Obsolete("Use the 'GetSimCardLiteAsync' method instead")]
         public async Task<ThingsMobileResponse<SimCollection>> ListSimCardsAsync(CancellationToken cancellationToken = default)
         {
             var url = new Uri(options.BaseUrl, "/services/business-api/simList");
