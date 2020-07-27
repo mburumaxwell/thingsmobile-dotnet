@@ -136,6 +136,7 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
+        [Obsolete("Use the 'GetSimCardsLiteAsync' method instead")]
         public async Task<ThingsMobileResponse<SimCollection>> ListSimCardsAsync(CancellationToken cancellationToken = default)
         {
             var url = new Uri(options.BaseUrl, "/services/business-api/simList");
@@ -143,7 +144,7 @@ namespace ThingsMobile
         }
 
         /// <summary>
-        /// Get a sim card
+        /// Get a sim card with call detail records
         /// </summary>
         /// <param name="msisdn">MSISDN of the sim card</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
@@ -156,6 +157,25 @@ namespace ThingsMobile
             };
 
             var url = new Uri(options.BaseUrl, "/services/business-api/simStatus");
+            return await PostAsync<SimCollection>(url, parameters, cancellationToken);
+        }
+
+        /// <summary>
+        /// Get sim card(s) without call detail records
+        /// </summary>
+        /// <param name="name">Name of the sim</param>
+        /// <param name="tag">Tag of the sim</param>>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string name, string tag, CancellationToken cancellationToken = default) 
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                ["name"] = name,
+                ["tag"] = tag
+            };
+
+            var url = new Uri(options.BaseUrl, "/services/business-api/simListLite");
             return await PostAsync<SimCollection>(url, parameters, cancellationToken);
         }
 
