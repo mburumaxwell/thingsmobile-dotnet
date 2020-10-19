@@ -48,7 +48,7 @@ namespace ThingsMobile.Tests
                 Token = token,
             };
             var client = new ThingsMobileClient(options, httpClient);
-            var response = await client.ListSimCardsAsync();
+            var response = await client.GetSimCardsLiteAsync();
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.True(response.IsSuccessful);
@@ -99,7 +99,7 @@ namespace ThingsMobile.Tests
                 Token = token,
             };
             var client = new ThingsMobileClient(options, httpClient);
-            var response = await client.ListSimCardsAsync();
+            var response = await client.GetSimCardsLiteAsync();
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             Assert.False(response.IsSuccessful);
