@@ -352,6 +352,30 @@ namespace ThingsMobile
         }
 
         /// <summary>
+        /// Recharge a sim
+        /// </summary>
+        /// <param name="msisdn">MSISDN for the SIM card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
+        /// <param name="amount">The amount in MB (Mega Bytes)</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
+        /// <returns></returns>
+        public async Task<ThingsMobileResponse<BaseResponseModel>> RechargeSimAsync(string msisdn,
+                                                                                    string iccid,
+                                                                                    int amount,
+                                                                                    CancellationToken cancellationToken = default)
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                ["msisdn"] = msisdn,
+                ["iccid"] = iccid,
+                ["amount"] = amount.ToString(),
+            };
+
+            var url = new Uri(options.BaseUrl, "/services/business-api/rechargeSim");
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+        }
+
+        /// <summary>
         /// Send actual request to things mobile
         /// </summary>
         /// <typeparam name="T"></typeparam>
