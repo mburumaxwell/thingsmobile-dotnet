@@ -368,22 +368,24 @@ namespace ThingsMobile
         /// <summary>
         /// Recharge a sim
         /// </summary>
+        /// <param name="amount">The amount in MB (Mega Bytes)</param>
         /// <param name="msisdn">MSISDN for the SIM card</param>
         /// <param name="iccid">ICCID for the SIM card</param>
-        /// <param name="amount">The amount in MB (Mega Bytes)</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> RechargeSimAsync(string msisdn,
-                                                                                    string iccid,
-                                                                                    int amount,
+        public async Task<ThingsMobileResponse<BaseResponseModel>> RechargeSimAsync(int amount,
+                                                                                    string msisdn = null,
+                                                                                    string iccid = null,
                                                                                     CancellationToken cancellationToken = default)
         {
             var parameters = new Dictionary<string, string>
             {
-                ["msisdn"] = msisdn,
-                ["iccid"] = iccid,
                 ["amount"] = amount.ToString(),
             };
+
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            else if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
+            else throw new InvalidOperationException($"Either '{nameof(msisdn)}' or '{nameof(iccid)}' is required.");
 
             var url = new Uri(options.BaseUrl, "/services/business-api/rechargeSim");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
