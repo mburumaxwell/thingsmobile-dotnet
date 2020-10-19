@@ -24,7 +24,7 @@ namespace ThingsMobile.Tests
                 var ua = Assert.Single(req.Headers.UserAgent);
                 Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
-                Assert.Equal("/services/business-api/simList", req.RequestUri.AbsolutePath);
+                Assert.Equal("/services/business-api/simListLite", req.RequestUri.AbsolutePath);
                 Assert.Empty(req.RequestUri.Query);
 
                 Assert.NotNull(req.Content);
@@ -48,7 +48,7 @@ namespace ThingsMobile.Tests
                 Token = token,
             };
             var client = new ThingsMobileClient(options, httpClient);
-            var response = await client.ListSimCardsAsync();
+            var response = await client.GetSimCardsLiteAsync();
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.True(response.IsSuccessful);
@@ -75,7 +75,7 @@ namespace ThingsMobile.Tests
                 var ua = Assert.Single(req.Headers.UserAgent);
                 Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
-                Assert.Equal("/services/business-api/simList", req.RequestUri.AbsolutePath);
+                Assert.Equal("/services/business-api/simListLite", req.RequestUri.AbsolutePath);
                 Assert.Empty(req.RequestUri.Query);
 
                 Assert.NotNull(req.Content);
@@ -99,7 +99,7 @@ namespace ThingsMobile.Tests
                 Token = token,
             };
             var client = new ThingsMobileClient(options, httpClient);
-            var response = await client.ListSimCardsAsync();
+            var response = await client.GetSimCardsLiteAsync();
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
             Assert.False(response.IsSuccessful);

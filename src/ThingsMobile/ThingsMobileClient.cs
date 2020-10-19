@@ -147,14 +147,22 @@ namespace ThingsMobile
         /// Get a sim card with call detail records
         /// </summary>
         /// <param name="msisdn">MSISDN of the sim card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
+        /// <param name="page">Page number for SIM CDRs</param>
+        /// <param name="pageSize">CDR number for page, maximum 2,000</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string msisdn, CancellationToken cancellationToken = default)
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string msisdn = null,
+                                                                               string iccid = null,
+                                                                               int? page = null,
+                                                                               int? pageSize = null,
+                                                                               CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
-            {
-                ["msisdn"] = msisdn,
-            };
+            var parameters = new Dictionary<string, string>();
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
+            if (page != null) parameters["page"] = page.Value.ToString();
+            if (pageSize != null) parameters["pageSize"] = pageSize.Value.ToString();
 
             var url = new Uri(options.BaseUrl, "/services/business-api/simStatus");
             return await PostAsync<SimCollection>(url, parameters, cancellationToken);
@@ -164,16 +172,22 @@ namespace ThingsMobile
         /// Get sim card(s) without call detail records
         /// </summary>
         /// <param name="name">Name of the sim</param>
-        /// <param name="tag">Tag of the sim</param>>
+        /// <param name="tag">Tag of the sim</param>
+        /// <param name="page">Page number for user’s SIM</param>
+        /// <param name="pageSize">SIM number per page, maximum 500</param>>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string name, string tag, CancellationToken cancellationToken = default) 
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string name = null,
+                                                                                    string tag = null,
+                                                                                    int? page = null,
+                                                                                    int? pageSize = null,
+                                                                                    CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
-            {
-                ["name"] = name,
-                ["tag"] = tag
-            };
+            var parameters = new Dictionary<string, string>();
+            if (!string.IsNullOrWhiteSpace(name)) parameters["name"] = name;
+            if (!string.IsNullOrWhiteSpace(tag)) parameters["tag"] = tag;
+            if (page != null) parameters["page"] = page.Value.ToString();
+            if (pageSize != null) parameters["pageSize"] = pageSize.Value.ToString();
 
             var url = new Uri(options.BaseUrl, "/services/business-api/simListLite");
             return await PostAsync<SimCollection>(url, parameters, cancellationToken);
@@ -348,6 +362,32 @@ namespace ThingsMobile
             };
 
             var url = new Uri(options.BaseUrl, "/services/business-api/updateSimTag");
+            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+        }
+
+        /// <summary>
+        /// Recharge a sim
+        /// </summary>
+        /// <param name="amount">The amount in MB (Mega Bytes)</param>
+        /// <param name="msisdn">MSISDN for the SIM card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
+        /// <returns></returns>
+        public async Task<ThingsMobileResponse<BaseResponseModel>> RechargeSimAsync(int amount,
+                                                                                    string msisdn = null,
+                                                                                    string iccid = null,
+                                                                                    CancellationToken cancellationToken = default)
+        {
+            var parameters = new Dictionary<string, string>
+            {
+                ["amount"] = amount.ToString(),
+            };
+
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            else if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
+            else throw new InvalidOperationException($"Either '{nameof(msisdn)}' or '{nameof(iccid)}' is required.");
+
+            var url = new Uri(options.BaseUrl, "/services/business-api/rechargeSim");
             return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
         }
 

@@ -21,7 +21,7 @@ namespace ExampleDependencyInjection
 
             var client = provider.GetRequiredService<ThingsMobileClient>();
 
-            var response = await client.ListSimCardsAsync();
+            var response = await client.GetSimCardsLiteAsync();
             var simcards = response.Resource;
             foreach (var sim in simcards.Sims)
             {
