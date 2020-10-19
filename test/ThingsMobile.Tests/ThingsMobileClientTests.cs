@@ -24,7 +24,7 @@ namespace ThingsMobile.Tests
                 var ua = Assert.Single(req.Headers.UserAgent);
                 Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
-                Assert.Equal("/services/business-api/simList", req.RequestUri.AbsolutePath);
+                Assert.Equal("/services/business-api/simListLite", req.RequestUri.AbsolutePath);
                 Assert.Empty(req.RequestUri.Query);
 
                 Assert.NotNull(req.Content);
@@ -75,7 +75,7 @@ namespace ThingsMobile.Tests
                 var ua = Assert.Single(req.Headers.UserAgent);
                 Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
-                Assert.Equal("/services/business-api/simList", req.RequestUri.AbsolutePath);
+                Assert.Equal("/services/business-api/simListLite", req.RequestUri.AbsolutePath);
                 Assert.Empty(req.RequestUri.Query);
 
                 Assert.NotNull(req.Content);
