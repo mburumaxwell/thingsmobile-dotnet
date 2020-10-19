@@ -176,17 +176,15 @@ namespace ThingsMobile
         /// <param name="pageSize">SIM number per page, maximum 500</param>>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string name,
-                                                                                    string tag,
-                                                                                    int? page,
-                                                                                    int? pageSize,
-                                                                                    CancellationToken cancellationToken = default) 
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string name = null,
+                                                                                    string tag = null,
+                                                                                    int? page = null,
+                                                                                    int? pageSize = null,
+                                                                                    CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
-            {
-                ["name"] = name,
-                ["tag"] = tag,
-            };
+            var parameters = new Dictionary<string, string>();
+            if (!string.IsNullOrWhiteSpace(name)) parameters["name"] = name;
+            if (!string.IsNullOrWhiteSpace(tag)) parameters["tag"] = tag;
             if (page != null) parameters["page"] = page.Value.ToString();
             if (pageSize != null) parameters["pageSize"] = pageSize.Value.ToString();
 
