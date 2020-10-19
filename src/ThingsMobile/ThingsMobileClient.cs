@@ -147,19 +147,20 @@ namespace ThingsMobile
         /// Get a sim card with call detail records
         /// </summary>
         /// <param name="msisdn">MSISDN of the sim card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
         /// <param name="page">Page number for SIM CDRs</param>
         /// <param name="pageSize">CDR number for page, maximum 2,000</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string msisdn,
-                                                                               int? page,
-                                                                               int? pageSize,
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string msisdn = null,
+                                                                               string iccid = null,
+                                                                               int? page = null,
+                                                                               int? pageSize = null,
                                                                                CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
-            {
-                ["msisdn"] = msisdn,
-            };
+            var parameters = new Dictionary<string, string>();
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
             if (page != null) parameters["page"] = page.Value.ToString();
             if (pageSize != null) parameters["pageSize"] = pageSize.Value.ToString();
 
