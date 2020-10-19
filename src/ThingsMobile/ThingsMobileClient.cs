@@ -164,16 +164,24 @@ namespace ThingsMobile
         /// Get sim card(s) without call detail records
         /// </summary>
         /// <param name="name">Name of the sim</param>
-        /// <param name="tag">Tag of the sim</param>>
+        /// <param name="tag">Tag of the sim</param>
+        /// <param name="page">Page number for user’s SIM</param>
+        /// <param name="pageSize">SIM number per page, maximum 500</param>>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string name, string tag, CancellationToken cancellationToken = default) 
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string name,
+                                                                                    string tag,
+                                                                                    int? page,
+                                                                                    int? pageSize,
+                                                                                    CancellationToken cancellationToken = default) 
         {
             var parameters = new Dictionary<string, string>
             {
                 ["name"] = name,
-                ["tag"] = tag
+                ["tag"] = tag,
             };
+            if (page != null) parameters["page"] = page.Value.ToString();
+            if (pageSize != null) parameters["pageSize"] = pageSize.Value.ToString();
 
             var url = new Uri(options.BaseUrl, "/services/business-api/simListLite");
             return await PostAsync<SimCollection>(url, parameters, cancellationToken);
