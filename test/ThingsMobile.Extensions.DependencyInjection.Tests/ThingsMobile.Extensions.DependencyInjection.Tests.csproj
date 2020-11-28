@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\ThingsMobile.Extensions.DependencyInjection\ThingsMobile.Extensions.DependencyInjection.csproj" />
-  </ItemGroup>
-
-</Project>
