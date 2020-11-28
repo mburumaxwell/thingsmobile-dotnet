@@ -6,9 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile", "src\ThingsMobile\ThingsMobile.csproj", "{AF273EDF-06C8-4700-8366-BECFD10F4B29}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E03BEF1E-99ED-4027-88DC-A026D651DB31}"
-	ProjectSection(SolutionItems) = preProject
-		src\Directory.Build.props = src\Directory.Build.props
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4B16D50E-9572-4078-A688-2984898D5ACB}"
 EndProject
