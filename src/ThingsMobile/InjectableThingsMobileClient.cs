@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using System.Net.Http;
 
-namespace ThingsMobile.Extensions.DependencyInjection
+namespace ThingsMobile
 {
     /// <summary>
     /// A wrapped <see cref="ThingsMobileClient"/> with single constructor to inject an <see cref="HttpClient"/>

@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Net.Http;
 using ThingsMobile;
-using ThingsMobile.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

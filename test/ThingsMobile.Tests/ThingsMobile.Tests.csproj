@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ThingsMobile\ThingsMobile.csproj" />
-    <ProjectReference Include="..\..\src\ThingsMobile.Extensions.DependencyInjection\ThingsMobile.Extensions.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>
