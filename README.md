@@ -12,11 +12,9 @@ The documentation that this Client is built on is available for download on the 
 
 To install using Package Manager Console use:
 > Install-Package ThingsMobile  
-> Install-Package ThingsMobile.Extensions.DependencyInjection
 
 To install using dotnet cli use:
 > dotnet add ThingsMobile  
-> dotnet add ThingsMobile.Extensions.DependencyInjection
 
 ### Usage
 

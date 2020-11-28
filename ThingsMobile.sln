@@ -12,9 +12,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile.Tests", "test\ThingsMobile.Tests\ThingsMobile.Tests.csproj", "{92B9D411-332A-497F-86AD-3E2775519931}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{8C441046-AE9D-4C58-9DF2-7C9CCC94D7CE}"
-	ProjectSection(SolutionItems) = preProject
-		examples\Directory.Build.props = examples\Directory.Build.props
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleSimple", "examples\ExampleSimple\ExampleSimple.csproj", "{5CDB558E-21A2-4608-AA41-8A64B71FE2C6}"
 EndProject
