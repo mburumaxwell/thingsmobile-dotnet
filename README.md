@@ -11,10 +11,10 @@ The documentation that this Client is built on is available for download on the 
 ### Installation
 
 To install using Package Manager Console use:
-> Install-Package ThingsMobile  
+> Install-Package ThingsMobile
 
 To install using dotnet cli use:
-> dotnet add ThingsMobile  
+> dotnet add ThingsMobile
 
 ### Usage
 
@@ -45,4 +45,4 @@ Please leave all comments, bugs, requests, and issues on the Issues page. We'll 
 
 ### License
 
-The Library is licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form") license. Refere to the [LICENSE](./LICENSE) file for more information.
+The Library is licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form") license. Refer to the [LICENSE](./LICENSE) file for more information.
