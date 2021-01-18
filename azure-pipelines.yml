@@ -13,7 +13,7 @@ trigger:
 pr:
   branches:
     include:
-      - master
+      - main
   paths:
     exclude: # no need to rebuild on changes in documentation
       - README.md
