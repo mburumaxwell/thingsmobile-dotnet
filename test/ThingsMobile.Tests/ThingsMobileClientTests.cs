@@ -26,6 +26,7 @@ namespace ThingsMobile.Tests
 
                 Assert.Equal("/services/business-api/simListLite", req.RequestUri.AbsolutePath);
                 Assert.Empty(req.RequestUri.Query);
+                Assert.Equal("https://api.thingsmobile.com/services/business-api/simListLite", req.RequestUri.ToString());
 
                 Assert.NotNull(req.Content);
                 Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);

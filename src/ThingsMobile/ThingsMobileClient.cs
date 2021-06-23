@@ -39,10 +39,8 @@ namespace ThingsMobile
                 throw new ArgumentNullException(nameof(options.Token));
             }
 
-            if (options.BaseUrl == null)
-            {
-                throw new ArgumentNullException(nameof(options.BaseUrl));
-            }
+            // set the base address
+            this.httpClient.BaseAddress = options.BaseUrl ?? throw new ArgumentNullException(nameof(options.BaseUrl));
 
             // populate the User-Agent header
             var productVersion = typeof(ThingsMobileClient).Assembly.GetName().Version.ToString();
@@ -385,8 +383,7 @@ namespace ThingsMobile
             parameters.Add("token", options.Token);
 
             // form the content and request
-            var url = new Uri(options.BaseUrl, path);
-            var request = new HttpRequestMessage(HttpMethod.Post, url)
+            var request = new HttpRequestMessage(HttpMethod.Post, path)
             {
                 Content = new FormUrlEncodedContent(parameters)
             };
