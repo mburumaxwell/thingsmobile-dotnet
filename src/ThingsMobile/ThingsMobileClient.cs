@@ -352,8 +352,8 @@ namespace ThingsMobile
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
         public async Task<ThingsMobileResponse<BaseResponseModel>> ChangeSimPlanAsync(string customPlanId,
-                                                                                     string? msisdn = null,
-                                                                                     string? iccid = null,
+                                                                                      string? msisdn = null,
+                                                                                      string? iccid = null,
                                                                                       CancellationToken cancellationToken = default)
         {
             var parameters = new Dictionary<string, string?> { ["customPlanId"] = customPlanId, };
@@ -368,19 +368,21 @@ namespace ThingsMobile
         /// <summary>
         /// Updates the sim tag
         /// </summary>
-        /// <param name="msisdn">MSISDN for the SIM card</param>
         /// <param name="tag">Tag for the SIM card</param>
+        /// <param name="msisdn">MSISDN for the SIM card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimTagAsync(string msisdn,
-                                                                                     string tag,
+        public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimTagAsync(string tag,
+                                                                                     string? msisdn = null,
+                                                                                     string? iccid = null,
                                                                                      CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string?>
-            {
-                ["msisdn"] = msisdn,
-                ["tag"] = tag
-            };
+            var parameters = new Dictionary<string, string?> { ["tag"] = tag, };
+
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            else if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
+            else throw new InvalidOperationException($"Either '{nameof(msisdn)}' or '{nameof(iccid)}' is required.");
 
             return await PostAsync<BaseResponseModel>("/services/business-api/updateSimTag", parameters, cancellationToken);
         }
