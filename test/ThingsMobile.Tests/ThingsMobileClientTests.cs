@@ -32,7 +32,7 @@ namespace ThingsMobile.Tests
                 Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
 
                 var expectedBody = $"username={username}&token={token}";
-                var actualBody = await req.Content!.ReadAsStringAsync();
+                var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
                 Assert.Equal(expectedBody, actualBody);
 
                 return new HttpResponseMessage
@@ -83,7 +83,7 @@ namespace ThingsMobile.Tests
                 Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
 
                 var expectedBody = $"username={username}&token={token}";
-                var actualBody = await req.Content!.ReadAsStringAsync();
+                var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
                 Assert.Equal(expectedBody, actualBody);
 
                 return new HttpResponseMessage
