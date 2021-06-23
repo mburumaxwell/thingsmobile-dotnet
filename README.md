@@ -1,5 +1,7 @@
 # ThingsMobile
 
+[![NuGet](https://img.shields.io/nuget/v/ThingsMobile.svg)](https://www.nuget.org/packages/ThingsMobile/)
+
 ## Introduction
 
 ThingsMobile makes it easy to maintain SIM cards and their data plans/usage all over the world. More about ThingsMobile on the [website](https://thingsmobile.com).
