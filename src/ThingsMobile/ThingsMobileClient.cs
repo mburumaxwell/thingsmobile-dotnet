@@ -392,29 +392,27 @@ namespace ThingsMobile
             var response = await httpClient.SendAsync(request, cancellationToken);
 
             // extract the response
-            using (var stream = await response.Content.ReadAsStreamAsync())
+            using var stream = await response.Content.ReadAsStreamAsync();
+            var error = default(ThingsMobileErrorResponse);
+            var resource = default(T);
+
+            if (response.IsSuccessStatusCode)
             {
-                var error = default(ThingsMobileErrorResponse);
-                var resource = default(T);
-
-                if (response.IsSuccessStatusCode)
-                {
-                    var serializer = new XmlSerializer(typeof(T));
-                    resource = (T)serializer.Deserialize(stream);
-                }
-                else
-                {
-                    error = (ThingsMobileErrorResponse)errorSerializer.Deserialize(stream);
-                }
-
-                return new ThingsMobileResponse<T>
-                {
-                    StatusCode = response.StatusCode,
-                    IsSuccessful = response.IsSuccessStatusCode,
-                    Error = error,
-                    Resource = resource,
-                };
+                var serializer = new XmlSerializer(typeof(T));
+                resource = (T)serializer.Deserialize(stream);
             }
+            else
+            {
+                error = (ThingsMobileErrorResponse)errorSerializer.Deserialize(stream);
+            }
+
+            return new ThingsMobileResponse<T>
+            {
+                StatusCode = response.StatusCode,
+                IsSuccessful = response.IsSuccessStatusCode,
+                Error = error,
+                Resource = resource,
+            };
         }
     }
 }
