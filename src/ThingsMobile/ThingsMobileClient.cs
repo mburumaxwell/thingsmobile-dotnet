@@ -85,6 +85,26 @@ namespace ThingsMobile
         }
 
         /// <summary>
+        /// Disconnect a sim card
+        /// </summary>
+        /// <param name="msisdn">MSISDN for the SIM card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
+        /// <param name="cancellationToken">The token for cancelling the task</param>
+        /// <returns></returns>
+        public async Task<ThingsMobileResponse<BaseResponseModel>> DisconnectSimCardAsync(string? msisdn = null,
+                                                                                          string? iccid = null,
+                                                                                          CancellationToken cancellationToken = default)
+        {
+            var parameters = new Dictionary<string, string?>();
+
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            else if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
+            else throw new InvalidOperationException($"Either '{nameof(msisdn)}' or '{nameof(iccid)}' is required.");
+
+            return await PostAsync<BaseResponseModel>("/services/business-api/disconnectSim", parameters, cancellationToken);
+        }
+
+        /// <summary>
         /// Modify an existing sim plan
         /// </summary>
         /// <param name="modifyCustomSimPlan">Details for the sim plan modifications</param>
