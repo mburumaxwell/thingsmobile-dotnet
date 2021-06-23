@@ -8,6 +8,6 @@
         /// <summary>
         /// Unique identifier for the custom sim plan
         /// </summary>
-        public string Id { get; set; }
+        public string? Id { get; set; }
     }
 }

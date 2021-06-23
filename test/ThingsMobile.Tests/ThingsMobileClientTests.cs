@@ -24,14 +24,15 @@ namespace ThingsMobile.Tests
                 var ua = Assert.Single(req.Headers.UserAgent);
                 Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
-                Assert.Equal("/services/business-api/simListLite", req.RequestUri.AbsolutePath);
-                Assert.Empty(req.RequestUri.Query);
+                Assert.Equal("/services/business-api/simListLite", req.RequestUri?.AbsolutePath);
+                Assert.Empty(req.RequestUri?.Query);
+                Assert.Equal("https://api.thingsmobile.com/services/business-api/simListLite", req.RequestUri?.ToString());
 
                 Assert.NotNull(req.Content);
                 Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
 
                 var expectedBody = $"username={username}&token={token}";
-                var actualBody = await req.Content.ReadAsStringAsync();
+                var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
                 Assert.Equal(expectedBody, actualBody);
 
                 return new HttpResponseMessage
@@ -54,7 +55,7 @@ namespace ThingsMobile.Tests
             Assert.True(response.IsSuccessful);
             Assert.Null(response.Error);
             Assert.NotNull(response.Resource);
-            Assert.True(response.Resource.IsSuccess);
+            Assert.True(response.Resource!.IsSuccess);
             var sim = Assert.Single(response.Resource.Sims);
             Assert.Equal("447937557899", sim.Msisdn);
         }
@@ -75,14 +76,14 @@ namespace ThingsMobile.Tests
                 var ua = Assert.Single(req.Headers.UserAgent);
                 Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
-                Assert.Equal("/services/business-api/simListLite", req.RequestUri.AbsolutePath);
-                Assert.Empty(req.RequestUri.Query);
+                Assert.Equal("/services/business-api/simListLite", req.RequestUri?.AbsolutePath);
+                Assert.Empty(req.RequestUri?.Query);
 
                 Assert.NotNull(req.Content);
                 Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
 
                 var expectedBody = $"username={username}&token={token}";
-                var actualBody = await req.Content.ReadAsStringAsync();
+                var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
                 Assert.Equal(expectedBody, actualBody);
 
                 return new HttpResponseMessage
@@ -105,7 +106,7 @@ namespace ThingsMobile.Tests
             Assert.False(response.IsSuccessful);
             Assert.Null(response.Resource);
             Assert.NotNull(response.Error);
-            Assert.False(response.Error.IsSuccess);
+            Assert.False(response.Error!.IsSuccess);
             Assert.Equal("1", response.Error.Code);
             Assert.Equal("Error description", response.Error.Description);
         }

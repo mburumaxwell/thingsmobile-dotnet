@@ -13,43 +13,43 @@ namespace ThingsMobile.Models
         /// Country where the record was made
         /// </summary>
         [XmlElement(ElementName = "cdrCountry")]
-        public string Country { get; set; }
+        public string? Country { get; set; }
 
         /// <summary>
         /// Time when the call started
         /// </summary>
         [XmlElement(ElementName = "cdrDateStart")]
-        public string StartDateString { get; set; }
+        public string? StartDateString { get; set; }
 
         /// <summary>
         /// Time when the call started
         /// </summary>
         [XmlIgnore]
-        public DateTime StartDate => DateTime.Parse(StartDateString);
+        public DateTime? StartDate => string.IsNullOrWhiteSpace(StartDateString) ? null : DateTime.Parse(StartDateString);
 
         /// <summary>
         /// Time when the call ended
         /// </summary>
         [XmlElement(ElementName = "cdrDateStop")]
-        public string EndDateString { get; set; }
+        public string? EndDateString { get; set; }
 
         /// <summary>
         /// Time when the call ended
         /// </summary>
         [XmlIgnore]
-        public DateTime EndDate => DateTime.Parse(EndDateString);
+        public DateTime? EndDate => string.IsNullOrWhiteSpace(EndDateString) ? null : DateTime.Parse(EndDateString);
 
         /// <summary>
         /// International mobile subscriber identity used to identify the user of a cellular network
         /// </summary>
         [XmlElement(ElementName = "cdrImsi")]
-        public string Imsi { get; set; }
+        public string? Imsi { get; set; }
 
         /// <summary>
         /// Network used
         /// </summary>
         [XmlElement(ElementName = "cdrNetwork")]
-        public string Network { get; set; }
+        public string? Network { get; set; }
 
         /// <summary>
         /// Traffic in bytes

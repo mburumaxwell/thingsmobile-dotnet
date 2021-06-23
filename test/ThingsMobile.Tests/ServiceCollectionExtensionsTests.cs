@@ -52,7 +52,7 @@ namespace ThingsMobile.Extensions.DependencyInjection.Tests
             // Assert
             var serviceDescriptor = collection.FirstOrDefault(x => x.ServiceType == typeof(ThingsMobileClient));
             Assert.NotNull(serviceDescriptor);
-            Assert.Equal(ServiceLifetime.Transient, serviceDescriptor.Lifetime);
+            Assert.Equal(ServiceLifetime.Transient, serviceDescriptor!.Lifetime);
         }
 
         [Fact]

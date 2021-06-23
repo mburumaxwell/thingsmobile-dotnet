@@ -12,12 +12,12 @@ namespace ThingsMobile
         /// <summary>
         /// The resource extracted from the response body
         /// </summary>
-        public T Resource { get; set; }
+        public T? Resource { get; set; }
 
         /// <summary>
         /// The error extracted from the response body
         /// </summary>
-        public ThingsMobileErrorResponse Error { get; set; }
+        public ThingsMobileErrorResponse? Error { get; set; }
 
         /// <summary>
         /// Status code response from the API
