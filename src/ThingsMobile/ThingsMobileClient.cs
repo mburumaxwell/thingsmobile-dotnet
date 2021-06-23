@@ -330,8 +330,8 @@ namespace ThingsMobile
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
         public async Task<ThingsMobileResponse<BaseResponseModel>> SendSmsToSimAsync(string message,
-                                                                                      string? msisdn = null,
-                                                                                      string? iccid = null,
+                                                                                     string? msisdn = null,
+                                                                                     string? iccid = null,
                                                                                      CancellationToken cancellationToken = default)
         {
             var parameters = new Dictionary<string, string?> { ["message"] = message, };
@@ -346,19 +346,21 @@ namespace ThingsMobile
         /// <summary>
         /// Associates a custom sim plan to specified sim card
         /// </summary>
-        /// <param name="msisdn">MSISDN for the sim card</param>
         /// <param name="customPlanId">Unique identifier for the sim plan</param>
+        /// <param name="msisdn">MSISDN for the sim card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> ChangeSimPlanAsync(string msisdn,
-                                                                                      string customPlanId,
+        public async Task<ThingsMobileResponse<BaseResponseModel>> ChangeSimPlanAsync(string customPlanId,
+                                                                                     string? msisdn = null,
+                                                                                     string? iccid = null,
                                                                                       CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string?>
-            {
-                ["msisdn"] = msisdn,
-                ["customPlanId"] = customPlanId
-            };
+            var parameters = new Dictionary<string, string?> { ["customPlanId"] = customPlanId, };
+
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            else if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
+            else throw new InvalidOperationException($"Either '{nameof(msisdn)}' or '{nameof(iccid)}' is required.");
 
             return await PostAsync<BaseResponseModel>("/services/business-api/changeSimPlan", parameters, cancellationToken);
         }
