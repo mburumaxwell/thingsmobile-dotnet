@@ -302,19 +302,21 @@ namespace ThingsMobile
         /// <summary>
         /// Updates the name of the sim
         /// </summary>
-        /// <param name="msisdn">MSISDN for the sim card</param>
         /// <param name="name">Name of the sim card</param>
+        /// <param name="msisdn">MSISDN for the SIM card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimNameAsync(string msisdn,
-                                                                                      string name,
+        public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimNameAsync(string name,
+                                                                                      string? msisdn = null,
+                                                                                      string? iccid = null,
                                                                                       CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string?>
-            {
-                ["msisdn"] = msisdn,
-                ["name"] = name
-            };
+            var parameters = new Dictionary<string, string?> { ["name"] = name, };
+
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            else if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
+            else throw new InvalidOperationException($"Either '{nameof(msisdn)}' or '{nameof(iccid)}' is required.");
 
             return await PostAsync<BaseResponseModel>("/services/business-api/updateSimName", parameters, cancellationToken);
         }
