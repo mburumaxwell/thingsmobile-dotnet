@@ -14,7 +14,7 @@ namespace ThingsMobile
     /// </summary>
     public class ThingsMobileClient
     {
-        private static readonly XmlSerializer errorSerializer = new XmlSerializer(typeof(ThingsMobileErrorResponse));
+        private static readonly XmlSerializer errorSerializer = new(typeof(ThingsMobileErrorResponse));
 
         private readonly ThingsMobileClientOptions options;
         private readonly HttpClient httpClient;
