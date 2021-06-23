@@ -15,12 +15,12 @@ namespace ThingsMobile
         /// Numeric error code on Things Mobile API
         /// </summary>
         [XmlElement("errorCode")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
 
         /// <summary>
         /// Error description on the Things Mobile API
         /// </summary>
         [XmlElement("errorMessage")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
     }
 }

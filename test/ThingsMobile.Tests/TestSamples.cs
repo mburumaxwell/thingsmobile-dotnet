@@ -8,7 +8,7 @@ namespace ThingsMobile.Tests
         public static Task<string> GetSampleResourceAsStringAsync(string fileName)
         {
             var resourceName = string.Join(".", typeof(TestSamples).Namespace, "Samples", fileName);
-            using var st = typeof(TestSamples).Assembly.GetManifestResourceStream(resourceName);
+            using var st = typeof(TestSamples).Assembly.GetManifestResourceStream(resourceName)!;
             using var reader = new StreamReader(st);
             return reader.ReadToEndAsync();
         }

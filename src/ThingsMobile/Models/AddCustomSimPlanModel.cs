@@ -8,7 +8,7 @@
         /// <summary>
         /// Name of the sim plan
         /// </summary>
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Sim auto recharge status

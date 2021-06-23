@@ -14,13 +14,13 @@ namespace ThingsMobile.Models
         /// </summary>
         [XmlArray("cdrs")]
         [XmlArrayItem("cdr", typeof(CallDetailRecord))]
-        public CallDetailRecord[] CallDetailRecords { get; set; }
+        public CallDetailRecord[]? CallDetailRecords { get; set; }
 
         /// <summary>
         /// Date when the SIM card was activated
         /// </summary>
         [XmlElement("activationDate")]
-        public string ActivationDateString { get; set; }
+        public string? ActivationDateString { get; set; }
 
         /// <summary>
         /// Date when the SIM card was activated
@@ -74,7 +74,7 @@ namespace ThingsMobile.Models
         /// Expiration date for the SIM
         /// </summary>
         [XmlElement("expirationDate")]
-        public string ExpirationDateString { get; set; }
+        public string? ExpirationDateString { get; set; }
 
         /// <summary>
         /// Expiration date for the SIM
@@ -86,7 +86,7 @@ namespace ThingsMobile.Models
         /// Date when the SIM card was last connected     
         /// </summary>
         [XmlElement("lastConnectionDate")]
-        public string LastConnectionDateString { get; set; }
+        public string? LastConnectionDateString { get; set; }
 
         /// <summary>
         /// Date when the SIM card was last connected     
@@ -98,7 +98,7 @@ namespace ThingsMobile.Models
         /// The barcode number for the sim card
         /// </summary>
         [XmlElement("iccid")]
-        public string ICCID { get; set; }
+        public string? ICCID { get; set; }
 
         /// <summary>
         /// Monthly traffic in bytes
@@ -116,25 +116,25 @@ namespace ThingsMobile.Models
         /// MSISDN of the SIM card
         /// </summary>
         [XmlElement("msisdn")]
-        public string Msisdn { get; set; }
+        public string? Msisdn { get; set; }
 
         /// <summary>
         /// Unique name used to identify the sim
         /// </summary>
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// The unique identifier for the plan the sim is associated with
         /// </summary>
         [XmlElement("plan")]
-        public string Plan { get; set; }
+        public string? Plan { get; set; }
 
         /// <summary>
         /// Whether the device is active or inactive
         /// </summary>
         [XmlElement("status")]
-        public string StatusString { get; set; }
+        public string? StatusString { get; set; }
 
         /// <summary>
         /// Whether the device is active or inactive
@@ -146,7 +146,7 @@ namespace ThingsMobile.Models
         /// A grouping tag for the sim
         /// </summary>
         [XmlElement("tag")]
-        public string Tag { get; set; }
+        public string? Tag { get; set; }
 
         /// <summary>
         /// Total traffic in bytes

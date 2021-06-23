@@ -24,7 +24,7 @@ namespace ThingsMobile
         /// </summary>
         /// <param name="httpClient"></param>
         /// <param name="options">The options for configuring the client</param>
-        public ThingsMobileClient(ThingsMobileClientOptions options, HttpClient httpClient = null)
+        public ThingsMobileClient(ThingsMobileClientOptions options, HttpClient? httpClient = null)
         {
             this.httpClient = httpClient ?? new HttpClient();
             this.options = options ?? throw new ArgumentNullException(nameof(options));
@@ -59,7 +59,7 @@ namespace ThingsMobile
                                                                                         string barcode,
                                                                                         CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = msisdn,
                 ["simBarcode"] = barcode
@@ -76,7 +76,7 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<BaseResponseModel>> BlockSimCardAsync(string msisdn, CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = msisdn,
             };
@@ -93,7 +93,7 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<BaseResponseModel>> ModifyCustomSimPlanAsync(ModifyCustomSimPlanModel modifyCustomSimPlan,
                                                                                             CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["Id"] = modifyCustomSimPlan.Id,
                 ["name"] = modifyCustomSimPlan.Name,
@@ -114,7 +114,7 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<BaseResponseModel>> CreateCustomSimPlanAsync(AddCustomSimPlanModel simPlanModel,
                                                                                             CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["name"] = simPlanModel.Name,
                 ["simAutoRechargeEnabled"] = $"{simPlanModel.EnableAutoRecharge}",
@@ -145,13 +145,13 @@ namespace ThingsMobile
         /// <param name="pageSize">CDR number for page, maximum 2,000</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string msisdn = null,
-                                                                               string iccid = null,
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string? msisdn = null,
+                                                                               string? iccid = null,
                                                                                int? page = null,
                                                                                int? pageSize = null,
                                                                                CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>();
+            var parameters = new Dictionary<string, string?>();
             if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
             if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
             if (page != null) parameters["page"] = page.Value.ToString();
@@ -169,13 +169,13 @@ namespace ThingsMobile
         /// <param name="pageSize">SIM number per page, maximum 500</param>>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string name = null,
-                                                                                    string tag = null,
+        public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string? name = null,
+                                                                                    string? tag = null,
                                                                                     int? page = null,
                                                                                     int? pageSize = null,
                                                                                     CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>();
+            var parameters = new Dictionary<string, string?>();
             if (!string.IsNullOrWhiteSpace(name)) parameters["name"] = name;
             if (!string.IsNullOrWhiteSpace(tag)) parameters["tag"] = tag;
             if (page != null) parameters["page"] = page.Value.ToString();
@@ -217,7 +217,7 @@ namespace ThingsMobile
                                                                                          bool blockSimAfterExpiry,
                                                                                          CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = msisdn,
                 ["expirationDate"] = expiryDateString,
@@ -236,7 +236,7 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimThresholdsAsync(SimThreshold threshold,
                                                                                          CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = threshold.MSISDN,
                 ["dailyLimit"] = $"{threshold.DailyLimit}",
@@ -259,7 +259,7 @@ namespace ThingsMobile
         public async Task<ThingsMobileResponse<BaseResponseModel>> UnblockSimCardAsync(string msisdn,
                                                                                        CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = msisdn,
             };
@@ -278,7 +278,7 @@ namespace ThingsMobile
                                                                                       string name,
                                                                                       CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = msisdn,
                 ["name"] = name
@@ -298,7 +298,7 @@ namespace ThingsMobile
                                                                                      string message,
                                                                                      CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = msisdn,
                 ["message"] = message
@@ -318,7 +318,7 @@ namespace ThingsMobile
                                                                                       string customPlanId,
                                                                                       CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = msisdn,
                 ["customPlanId"] = customPlanId
@@ -338,7 +338,7 @@ namespace ThingsMobile
                                                                                      string tag,
                                                                                      CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["msisdn"] = msisdn,
                 ["tag"] = tag
@@ -356,11 +356,11 @@ namespace ThingsMobile
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
         public async Task<ThingsMobileResponse<BaseResponseModel>> RechargeSimAsync(int amount,
-                                                                                    string msisdn = null,
-                                                                                    string iccid = null,
+                                                                                    string? msisdn = null,
+                                                                                    string? iccid = null,
                                                                                     CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string>
+            var parameters = new Dictionary<string, string?>
             {
                 ["amount"] = amount.ToString(),
             };
@@ -372,15 +372,15 @@ namespace ThingsMobile
             return await PostAsync<BaseResponseModel>("/services/business-api/rechargeSim", parameters, cancellationToken);
         }
 
-        private async Task<ThingsMobileResponse<T>> PostAsync<T>(string path, Dictionary<string, string> parameters = null, CancellationToken cancellationToken = default)
+        private async Task<ThingsMobileResponse<T>> PostAsync<T>(string path, Dictionary<string, string?>? parameters = null, CancellationToken cancellationToken = default)
             where T : BaseResponseModel
         {
             // ensure there are parameters
-            parameters = parameters ?? new Dictionary<string, string>();
+            parameters = parameters ?? new Dictionary<string, string?>();
 
             // add authentication parameters
-            parameters.Add("username", options.Username);
-            parameters.Add("token", options.Token);
+            parameters.Add("username", options.Username!);
+            parameters.Add("token", options.Token!);
 
             // form the content and request
             var request = new HttpRequestMessage(HttpMethod.Post, path)

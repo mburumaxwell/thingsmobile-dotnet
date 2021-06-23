@@ -15,7 +15,7 @@ namespace ThingsMobile.Models
         /// </summary>
         [XmlArray("creditHistory")]
         [XmlArrayItem("historyRow", typeof(RechargeHistory))]
-        public RechargeHistory[] History { get; set; }
+        public RechargeHistory[]? History { get; set; }
 
         /// <summary>
         /// Credit left
@@ -27,6 +27,6 @@ namespace ThingsMobile.Models
         /// The currency kind (e.g USD, EUR etc)
         /// </summary>
         [XmlElement("currency")]
-        public string Currency { get; set; }
+        public string? Currency { get; set; }
     }
 }

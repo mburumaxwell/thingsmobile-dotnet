@@ -23,9 +23,12 @@ namespace ExampleDependencyInjection
 
             var response = await client.GetSimCardsLiteAsync();
             var simcards = response.Resource;
-            foreach (var sim in simcards.Sims)
+            if (simcards is not null && simcards.Sims is not null)
             {
-                Console.WriteLine($"MSISDN: {sim.Msisdn}, Name: {sim.Name}, Tag: {sim.Tag}, Status: {sim.Status}");
+                foreach (var sim in simcards.Sims)
+                {
+                    Console.WriteLine($"MSISDN: {sim.Msisdn}, Name: {sim.Name}, Tag: {sim.Tag}, Status: {sim.Status}");
+                }
             }
         }
     }

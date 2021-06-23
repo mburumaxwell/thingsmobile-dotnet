@@ -20,8 +20,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configureOptions">A delegate that is used to configure a <see cref="ThingsMobileClientOptions"/>.</param>
         /// <returns>An <see cref="IHttpClientBuilder" /> that can be used to configure the client.</returns>
         public static IHttpClientBuilder AddThingsMobile(this IServiceCollection services,
-                                                               IConfiguration configuration = null,
-                                                               Action<ThingsMobileClientOptions> configureOptions = null)
+                                                         IConfiguration? configuration = null,
+                                                         Action<ThingsMobileClientOptions>? configureOptions = null)
         {
             // if we have a configuration, add it
             if (configuration != null)
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="configureOptions">A delegate that is used to configure a <see cref="ThingsMobileClientOptions"/>.</param>
         /// <returns>An <see cref="IHttpClientBuilder" /> that can be used to configure the client.</returns>
         public static IHttpClientBuilder AddThingsMobile(this IServiceCollection services,
-                                                               Action<ThingsMobileClientOptions> configureOptions)
+                                                         Action<ThingsMobileClientOptions> configureOptions)
         {
             return services.AddThingsMobile(null, configureOptions);
         }
@@ -100,8 +100,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </param>
         /// <returns>An <see cref="IHttpClientBuilder" /> that can be used to configure the client.</returns>
         public static IHttpClientBuilder AddThingsMobile(this IServiceCollection services,
-                                                               string username,
-                                                               string token)
+                                                         string username,
+                                                         string token)
         {
             return services.AddThingsMobile(o =>
             {

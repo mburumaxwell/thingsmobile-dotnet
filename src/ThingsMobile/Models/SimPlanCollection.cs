@@ -15,6 +15,6 @@ namespace ThingsMobile.Models
         /// </summary>
         [XmlArray("plans")]
         [XmlArrayItem("plan", typeof(SimPlan))]
-        public SimPlan[] SimPlans { get; set; }
+        public SimPlan[]? SimPlans { get; set; }
     }
 }

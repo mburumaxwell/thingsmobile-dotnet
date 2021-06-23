@@ -8,7 +8,7 @@
         /// <summary>
         /// Msisdn for the sim card
         /// </summary>
-        public string MSISDN { get; set; }
+        public string? MSISDN { get; set; }
 
         /// <summary>
         /// Daily traffic threshold in MB

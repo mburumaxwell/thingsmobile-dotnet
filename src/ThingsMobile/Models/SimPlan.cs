@@ -13,13 +13,13 @@ namespace ThingsMobile.Models
         /// Unique identifier for the sim plan
         /// </summary>
         [XmlElement("id")]
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
         /// <summary>
         /// Name of the plan
         /// </summary>
         [XmlElement("name")]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Indicates if auto recharge is enabled
