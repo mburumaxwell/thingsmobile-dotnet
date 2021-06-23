@@ -231,10 +231,10 @@ namespace ThingsMobile
         /// <summary>
         /// Sets an expiry date for a sim card
         /// </summary>
+        /// <param name="blockSimAfterExpiry">Whether to  block the sim card after expiry</param>
         /// <param name="msisdn">MSISDN for the SIM card</param>
         /// <param name="iccid">ICCID for the SIM card</param>
         /// <param name="expiryDateString">Date which the sim card expires. Format (yyyy-MM-dd)</param>
-        /// <param name="blockSimAfterExpiry">Whether to  block the sim card after expiry</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
         public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimExpiryDateAsync(string expiryDateString,
@@ -324,19 +324,21 @@ namespace ThingsMobile
         /// <summary>
         /// Send an SMS to an active Things Mobile SIM 
         /// </summary>
-        /// <param name="msisdn">MSISDN for the sim card</param>
         /// <param name="message">sms message (160 characters maximum)</param>
+        /// <param name="msisdn">MSISDN for the SIM card</param>
+        /// <param name="iccid">ICCID for the SIM card</param>
         /// <param name="cancellationToken">The token for cancelling the task</param>
         /// <returns></returns>
-        public async Task<ThingsMobileResponse<BaseResponseModel>> SendSmsToSimAsync(string msisdn,
-                                                                                     string message,
+        public async Task<ThingsMobileResponse<BaseResponseModel>> SendSmsToSimAsync(string message,
+                                                                                      string? msisdn = null,
+                                                                                      string? iccid = null,
                                                                                      CancellationToken cancellationToken = default)
         {
-            var parameters = new Dictionary<string, string?>
-            {
-                ["msisdn"] = msisdn,
-                ["message"] = message
-            };
+            var parameters = new Dictionary<string, string?> { ["message"] = message, };
+
+            if (!string.IsNullOrWhiteSpace(msisdn)) parameters["msisdn"] = msisdn;
+            else if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
+            else throw new InvalidOperationException($"Either '{nameof(msisdn)}' or '{nameof(iccid)}' is required.");
 
             return await PostAsync<BaseResponseModel>("/services/business-api/sendSms", parameters, cancellationToken);
         }
