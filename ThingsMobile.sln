@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile", "src\ThingsM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E03BEF1E-99ED-4027-88DC-A026D651DB31}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4B16D50E-9572-4078-A688-2984898D5ACB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4B16D50E-9572-4078-A688-2984898D5ACB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile.Tests", "test\ThingsMobile.Tests\ThingsMobile.Tests.csproj", "{92B9D411-332A-497F-86AD-3E2775519931}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile.Tests", "tests\ThingsMobile.Tests\ThingsMobile.Tests.csproj", "{92B9D411-332A-497F-86AD-3E2775519931}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{8C441046-AE9D-4C58-9DF2-7C9CCC94D7CE}"
 EndProject
