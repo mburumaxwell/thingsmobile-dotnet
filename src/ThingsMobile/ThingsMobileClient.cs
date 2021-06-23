@@ -67,8 +67,7 @@ namespace ThingsMobile
                 ["simBarcode"] = barcode
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/activateSim");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/activateSim", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -84,8 +83,7 @@ namespace ThingsMobile
                 ["msisdn"] = msisdn,
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/blockSim");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/blockSim", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -106,8 +104,7 @@ namespace ThingsMobile
                 ["simAutoRechargeAmount"] = $"{modifyCustomSimPlan.AutoRechargeAmount}"
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/modifyCustomPlan");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/modifyCustomPlan", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -127,8 +124,7 @@ namespace ThingsMobile
                 ["simAutoRechargeAmount"] = $"{simPlanModel.AutoRechargeAmount}"
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/createCustomPlan");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/createCustomPlan", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -139,8 +135,7 @@ namespace ThingsMobile
         [Obsolete("Use the 'GetSimCardsLiteAsync' method instead")]
         public async Task<ThingsMobileResponse<SimCollection>> ListSimCardsAsync(CancellationToken cancellationToken = default)
         {
-            var url = new Uri(options.BaseUrl, "/services/business-api/simList");
-            return await PostAsync<SimCollection>(url, cancellationToken);
+            return await PostAsync<SimCollection>("/services/business-api/simList", cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -164,8 +159,7 @@ namespace ThingsMobile
             if (page != null) parameters["page"] = page.Value.ToString();
             if (pageSize != null) parameters["pageSize"] = pageSize.Value.ToString();
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/simStatus");
-            return await PostAsync<SimCollection>(url, parameters, cancellationToken);
+            return await PostAsync<SimCollection>("/services/business-api/simStatus", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -189,8 +183,7 @@ namespace ThingsMobile
             if (page != null) parameters["page"] = page.Value.ToString();
             if (pageSize != null) parameters["pageSize"] = pageSize.Value.ToString();
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/simListLite");
-            return await PostAsync<SimCollection>(url, parameters, cancellationToken);
+            return await PostAsync<SimCollection>("/services/business-api/simListLite", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -200,8 +193,7 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<Credit>> GetCreditDetailsAsync(CancellationToken cancellationToken = default)
         {
-            var url = new Uri(options.BaseUrl, "/services/business-api/credit");
-            return await PostAsync<Credit>(url, cancellationToken);
+            return await PostAsync<Credit>("/services/business-api/credit", cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -211,8 +203,7 @@ namespace ThingsMobile
         /// <returns></returns>
         public async Task<ThingsMobileResponse<SimPlanCollection>> GetSimPlansAsync(CancellationToken cancellationToken = default)
         {
-            var url = new Uri(options.BaseUrl, "/services/business-api/customPlanList");
-            return await PostAsync<SimPlanCollection>(url, cancellationToken);
+            return await PostAsync<SimPlanCollection>("/services/business-api/customPlanList", cancellationToken: cancellationToken);
         }
 
         /// <summary>
@@ -235,8 +226,7 @@ namespace ThingsMobile
                 ["blockSim"] = blockSimAfterExpiry ? "1" : "0"
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/setupSimExpirationDate");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/setupSimExpirationDate", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -259,8 +249,7 @@ namespace ThingsMobile
                 ["blockSimTotal"] = threshold.BlockSimTotal ? "1" : "0"
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/setupSimTrafficThreshold");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/setupSimTrafficThreshold", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -277,8 +266,7 @@ namespace ThingsMobile
                 ["msisdn"] = msisdn,
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/unblockSim");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/unblockSim", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -298,8 +286,7 @@ namespace ThingsMobile
                 ["name"] = name
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/updateSimName");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/updateSimName", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -319,8 +306,7 @@ namespace ThingsMobile
                 ["message"] = message
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/sendSms");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/sendSms", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -340,8 +326,7 @@ namespace ThingsMobile
                 ["customPlanId"] = customPlanId
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/changeSimPlan");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/changeSimPlan", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -361,8 +346,7 @@ namespace ThingsMobile
                 ["tag"] = tag
             };
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/updateSimTag");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/updateSimTag", parameters, cancellationToken);
         }
 
         /// <summary>
@@ -387,32 +371,10 @@ namespace ThingsMobile
             else if (!string.IsNullOrWhiteSpace(iccid)) parameters["iccid"] = iccid;
             else throw new InvalidOperationException($"Either '{nameof(msisdn)}' or '{nameof(iccid)}' is required.");
 
-            var url = new Uri(options.BaseUrl, "/services/business-api/rechargeSim");
-            return await PostAsync<BaseResponseModel>(url, parameters, cancellationToken);
+            return await PostAsync<BaseResponseModel>("/services/business-api/rechargeSim", parameters, cancellationToken);
         }
 
-        /// <summary>
-        /// Send actual request to things mobile
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="url">The url to make the request to</param>
-        /// <param name="cancellationToken">The token for cancelling the task</param>
-        /// <returns></returns>
-        private Task<ThingsMobileResponse<T>> PostAsync<T>(Uri url, CancellationToken cancellationToken = default)
-            where T : BaseResponseModel
-        {
-            return PostAsync<T>(url, null, cancellationToken);
-        }
-
-        /// <summary>
-        /// Send actual request to things mobile
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="url">The url to make the request to</param>
-        /// <param name="parameters">The body parameters</param>
-        /// <param name="cancellationToken">The token for cancelling the task</param>
-        /// <returns></returns>
-        private async Task<ThingsMobileResponse<T>> PostAsync<T>(Uri url, Dictionary<string, string> parameters, CancellationToken cancellationToken = default)
+        private async Task<ThingsMobileResponse<T>> PostAsync<T>(string path, Dictionary<string, string> parameters = null, CancellationToken cancellationToken = default)
             where T : BaseResponseModel
         {
             // ensure there are parameters
@@ -423,6 +385,7 @@ namespace ThingsMobile
             parameters.Add("token", options.Token);
 
             // form the content and request
+            var url = new Uri(options.BaseUrl, path);
             var request = new HttpRequestMessage(HttpMethod.Post, url)
             {
                 Content = new FormUrlEncodedContent(parameters)
