@@ -40,7 +40,7 @@ namespace ThingsMobile
             }
 
             // set the base address
-            this.httpClient.BaseAddress = options.BaseUrl ?? throw new ArgumentNullException(nameof(options.BaseUrl));
+            this.httpClient.BaseAddress = options.Endpoint ?? throw new ArgumentNullException(nameof(options.Endpoint));
 
             // populate the User-Agent header
             var productVersion = typeof(ThingsMobileClient).Assembly.GetName().Version.ToString();

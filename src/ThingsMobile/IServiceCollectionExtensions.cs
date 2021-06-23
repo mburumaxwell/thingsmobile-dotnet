@@ -48,9 +48,9 @@ namespace Microsoft.Extensions.DependencyInjection
                          throw new ArgumentNullException(nameof(o.Token));
                      }
 
-                     if (o.BaseUrl == null)
+                     if (o.Endpoint == null)
                      {
-                         throw new ArgumentNullException(nameof(o.BaseUrl));
+                         throw new ArgumentNullException(nameof(o.Endpoint));
                      }
 
                  });
