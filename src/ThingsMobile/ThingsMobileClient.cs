@@ -376,7 +376,7 @@ namespace ThingsMobile
             where T : BaseResponseModel
         {
             // ensure there are parameters
-            parameters = parameters ?? new Dictionary<string, string?>();
+            parameters ??= new Dictionary<string, string?>();
 
             // add authentication parameters
             parameters.Add("username", options.Username!);
