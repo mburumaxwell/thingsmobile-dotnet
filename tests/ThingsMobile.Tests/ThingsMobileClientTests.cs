@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -41,14 +42,17 @@ namespace ThingsMobile.Tests
                     Content = new StringContent(await TestSamples.GetSimListResponseAsync(), Encoding.UTF8, "text/xml")
                 };
             });
-            var httpClient = new HttpClient(handler);
 
-            var options = new ThingsMobileClientOptions
-            {
-                Username = username,
-                Token = token,
-            };
-            var client = new ThingsMobileClient(options, httpClient);
+            var services = new ServiceCollection()
+                .AddThingsMobile(options =>
+                {
+                    options.Username = username;
+                    options.Token = token;
+                })
+                .ConfigurePrimaryHttpMessageHandler(() => handler)
+                .Services.BuildServiceProvider();
+            var client = services.GetRequiredService<ThingsMobileClient>();
+
             var response = await client.GetSimCardsLiteAsync();
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -92,14 +96,17 @@ namespace ThingsMobile.Tests
                     Content = new StringContent(await TestSamples.GetErrorAsync(), Encoding.UTF8, "text/xml")
                 };
             });
-            var httpClient = new HttpClient(handler);
 
-            var options = new ThingsMobileClientOptions
-            {
-                Username = username,
-                Token = token,
-            };
-            var client = new ThingsMobileClient(options, httpClient);
+            var services = new ServiceCollection()
+                .AddThingsMobile(options =>
+                {
+                    options.Username = username;
+                    options.Token = token;
+                })
+                .ConfigurePrimaryHttpMessageHandler(() => handler)
+                .Services.BuildServiceProvider();
+            var client = services.GetRequiredService<ThingsMobileClient>();
+
             var response = await client.GetSimCardsLiteAsync();
             Assert.NotNull(response);
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);

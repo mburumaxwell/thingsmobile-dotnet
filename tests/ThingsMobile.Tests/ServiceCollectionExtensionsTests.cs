@@ -1,10 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
 using System.Linq;
 using Xunit;
 
-namespace ThingsMobile.Extensions.DependencyInjection.Tests
+namespace ThingsMobile.Tests
 {
     public class ServiceCollectionExtensionsTests
     {
@@ -15,7 +14,7 @@ namespace ThingsMobile.Extensions.DependencyInjection.Tests
             var services = new ServiceCollection().AddThingsMobile(options => { }).Services.BuildServiceProvider();
 
             // Act && Assert
-            Assert.Throws<ArgumentNullException>(() => services.GetRequiredService<ThingsMobileClient>());
+            Assert.Throws<OptionsValidationException>(() => services.GetRequiredService<ThingsMobileClient>());
         }
 
         [Fact]

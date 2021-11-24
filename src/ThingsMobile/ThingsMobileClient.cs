@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -23,11 +24,11 @@ namespace ThingsMobile
         /// Creates an instance if <see cref="ThingsMobileClient"/>
         /// </summary>
         /// <param name="httpClient"></param>
-        /// <param name="options">The options for configuring the client</param>
-        public ThingsMobileClient(ThingsMobileClientOptions options, HttpClient? httpClient = null)
+        /// <param name="optionsAccessor">The options for configuring the client</param>
+        public ThingsMobileClient(HttpClient httpClient, IOptions<ThingsMobileClientOptions> optionsAccessor)
         {
             this.httpClient = httpClient ?? new HttpClient();
-            this.options = options ?? throw new ArgumentNullException(nameof(options));
+            options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
 
             if (string.IsNullOrWhiteSpace(options.Username))
             {
