@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -30,21 +31,11 @@ namespace ThingsMobile
             this.httpClient = httpClient ?? new HttpClient();
             options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
 
-            if (string.IsNullOrWhiteSpace(options.Username))
-            {
-                throw new ArgumentNullException(nameof(options.Username));
-            }
-
-            if (string.IsNullOrWhiteSpace(options.Token))
-            {
-                throw new ArgumentNullException(nameof(options.Token));
-            }
-
             // set the base address
-            this.httpClient.BaseAddress = options.Endpoint ?? throw new ArgumentNullException(nameof(options.Endpoint));
+            this.httpClient.BaseAddress = options.Endpoint;
 
             // populate the User-Agent header
-            var productVersion = typeof(ThingsMobileClient).Assembly.GetName().Version.ToString();
+            var productVersion = typeof(ThingsMobileClient).Assembly.GetName().Version!.ToString();
             var userAgent = new ProductInfoHeaderValue("thingsmobile-dotnet", productVersion);
             this.httpClient.DefaultRequestHeaders.UserAgent.Add(userAgent);
         }
@@ -420,31 +411,36 @@ namespace ThingsMobile
             parameters ??= new Dictionary<string, string?>();
 
             // add authentication parameters
-            parameters.Add("username", options.Username!);
-            parameters.Add("token", options.Token!);
+            parameters.Add("username", options.Username);
+            parameters.Add("token", options.Token);
 
             // form the content and request
+            var nvc = parameters.Select(kvp => new KeyValuePair<string?, string?>(kvp.Key, kvp.Value));
             var request = new HttpRequestMessage(HttpMethod.Post, path)
             {
-                Content = new FormUrlEncodedContent(parameters)
+                Content = new FormUrlEncodedContent(nvc)
             };
 
             // send the request
             var response = await httpClient.SendAsync(request, cancellationToken);
 
             // extract the response
+#if NET5_0_OR_GREATER
+            using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+#else
             using var stream = await response.Content.ReadAsStreamAsync();
+#endif
             var error = default(ThingsMobileErrorResponse);
             var resource = default(T);
 
             if (response.IsSuccessStatusCode)
             {
                 var serializer = new XmlSerializer(typeof(T));
-                resource = (T)serializer.Deserialize(stream);
+                resource = (T?)serializer.Deserialize(stream);
             }
             else
             {
-                error = (ThingsMobileErrorResponse)errorSerializer.Deserialize(stream);
+                error = (ThingsMobileErrorResponse?)errorSerializer.Deserialize(stream);
             }
 
             return new ThingsMobileResponse<T>
