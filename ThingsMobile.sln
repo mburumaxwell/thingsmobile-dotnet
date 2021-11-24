@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30225.117
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile", "src\ThingsMobile\ThingsMobile.csproj", "{AF273EDF-06C8-4700-8366-BECFD10F4B29}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile.Tests", "tests\ThingsMobile.Tests\ThingsMobile.Tests.csproj", "{92B9D411-332A-497F-86AD-3E2775519931}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{8C441046-AE9D-4C58-9DF2-7C9CCC94D7CE}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleSimple", "examples\ExampleSimple\ExampleSimple.csproj", "{5CDB558E-21A2-4608-AA41-8A64B71FE2C6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleDependencyInjection", "examples\ExampleDependencyInjection\ExampleDependencyInjection.csproj", "{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}"
 EndProject
@@ -31,10 +29,6 @@ Global
 		{92B9D411-332A-497F-86AD-3E2775519931}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92B9D411-332A-497F-86AD-3E2775519931}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92B9D411-332A-497F-86AD-3E2775519931}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CDB558E-21A2-4608-AA41-8A64B71FE2C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CDB558E-21A2-4608-AA41-8A64B71FE2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CDB558E-21A2-4608-AA41-8A64B71FE2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CDB558E-21A2-4608-AA41-8A64B71FE2C6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,7 +40,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AF273EDF-06C8-4700-8366-BECFD10F4B29} = {E03BEF1E-99ED-4027-88DC-A026D651DB31}
 		{92B9D411-332A-497F-86AD-3E2775519931} = {4B16D50E-9572-4078-A688-2984898D5ACB}
-		{5CDB558E-21A2-4608-AA41-8A64B71FE2C6} = {8C441046-AE9D-4C58-9DF2-7C9CCC94D7CE}
 		{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6} = {8C441046-AE9D-4C58-9DF2-7C9CCC94D7CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
