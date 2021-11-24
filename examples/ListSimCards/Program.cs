@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using ThingsMobile;
 
-namespace ExampleDependencyInjection
+namespace ListSimCards
 {
     class Program
     {

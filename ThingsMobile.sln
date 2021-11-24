@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThingsMobile.Tests", "tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{8C441046-AE9D-4C58-9DF2-7C9CCC94D7CE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExampleDependencyInjection", "examples\ExampleDependencyInjection\ExampleDependencyInjection.csproj", "{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ListSimCards", "examples\ListSimCards\ListSimCards.csproj", "{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
