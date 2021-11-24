@@ -1,14 +1,13 @@
-﻿namespace ThingsMobile.Models
-{
-    /// <summary>
-    /// The status of a SIM card
-    /// </summary>
-    public enum SimStatus
-    {
-        ///
-        Active,
+﻿namespace ThingsMobile.Models;
 
-        ///
-        Inactive
-    }
+/// <summary>
+/// The status of a SIM card
+/// </summary>
+public enum SimStatus
+{
+    ///
+    Active,
+
+    ///
+    Inactive
 }
