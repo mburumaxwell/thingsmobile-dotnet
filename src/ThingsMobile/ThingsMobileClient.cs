@@ -425,7 +425,11 @@ namespace ThingsMobile
             var response = await httpClient.SendAsync(request, cancellationToken);
 
             // extract the response
+#if NET5_0_OR_GREATER
+            using var stream = await response.Content.ReadAsStreamAsync(cancellationToken);
+#else
             using var stream = await response.Content.ReadAsStreamAsync();
+#endif
             var error = default(ThingsMobileErrorResponse);
             var resource = default(T);
 
