@@ -21,4 +21,13 @@ public class ThingsMobileClientOptions
     /// For test purposes, set this value to <c>https://test.thingsmobile.com/</c>
     /// </summary>
     public Uri Endpoint { get; set; } = new Uri("https://api.thingsmobile.com/");
+
+    /// <summary>Use credentials and endpoint for the test environment.</summary>
+    /// <remarks>See docs for test SIMs</remarks>
+    public void UseTestEnvironment()
+    {
+        Username = "test";
+        Token = "Thingsmobil3";
+        Endpoint = new Uri("https://test.thingsmobile.com/");
+    }
 }
