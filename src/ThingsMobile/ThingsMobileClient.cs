@@ -423,6 +423,36 @@ public class ThingsMobileClient
         return await PostAsync<BasicResponse>("/services/business-api/downloadCdr", parameters, cancellationToken);
     }
 
+    /// <summary>
+    /// Get paginated CDRs for the selected SIM in the time range.
+    /// </summary>
+    /// <param name="msisdnList">Sim numbers</param>
+    /// <param name="start">Start date of the range</param>
+    /// <param name="end">End date of the range</param>
+    /// <param name="page">page number for SIM's CDR</param>
+    /// <param name="pageSize">CDR number per page</param>
+    /// <param name="cancellationToken">The token for cancelling the task</param>
+    /// <returns></returns>
+    public async Task<ThingsMobileResponse<CdrPaginated>> GetCdrAsync(List<string> msisdnList,
+                                                                      DateTimeOffset? start = null,
+                                                                      DateTimeOffset? end = null,
+                                                                      int? page = null,
+                                                                      int? pageSize = null,
+                                                                      CancellationToken cancellationToken = default)
+    {
+        var parameters = new Dictionary<string, string?>
+        {
+            ["msisdnList"] = string.Join(",", msisdnList),
+        };
+
+        if (start is not null) parameters["startDateRange"] = start.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        if (end is not null) parameters["endDateRange"] = end.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        if (page is not null) parameters["page"] = page.Value.ToString();
+        if (pageSize is not null) parameters["pageSize"] = Math.Min(pageSize.Value, 500).ToString();
+
+        return await PostAsync<CdrPaginated>("/services/business-api/getCdrPaginated", parameters, cancellationToken);
+    }
+
     private async Task<ThingsMobileResponse<T>> PostAsync<T>(string path, Dictionary<string, string?>? parameters = null, CancellationToken cancellationToken = default)
         where T : BaseResponseModel
     {

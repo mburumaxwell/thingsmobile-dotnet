@@ -1,0 +1,14 @@
+﻿<result>
+	<cdrsPaginated>
+		<cdrPaginated>
+			<cdrCountry>ESP</cdrCountry>
+			<cdrDateStart>2020-10-05 19:11:48</cdrDateStart>
+			<cdrDateStop>2020-10-05 19:21:48</cdrDateStop>
+			<cdrMsisdn>882360001975037</cdrMsisdn>
+			<cdrNetwork>Zone 1</cdrNetwork>
+			<cdrOperator>ESPVV</cdrOperator>
+			<cdrTraffic>1000000</cdrTraffic>
+		</cdrPaginated>
+	</cdrsPaginated>
+	<done>true</done>
+</result>

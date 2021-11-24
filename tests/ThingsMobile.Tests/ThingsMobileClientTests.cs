@@ -115,4 +115,58 @@ public class ThingsMobileClientTests
         Assert.Equal("1", response.Error.Code);
         Assert.Equal("Error description", response.Error.Description);
     }
+
+    [Fact]
+    public async Task ResponseIsDeserializedCorrectly_CdrPaginated()
+    {
+        const string username = "username";
+        const string token = "token";
+
+        var handler = new DynamicHttpMessageHandler(async (req, ct) =>
+        {
+            Assert.Equal(HttpMethod.Post, req.Method);
+
+            Assert.Null(req.Headers.Authorization);
+
+            Assert.NotNull(req.Headers.UserAgent);
+            var ua = Assert.Single(req.Headers.UserAgent);
+            Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
+
+            Assert.Equal("/services/business-api/getCdrPaginated", req.RequestUri?.AbsolutePath);
+            Assert.Empty(req.RequestUri?.Query);
+
+            Assert.NotNull(req.Content);
+            Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
+
+            var expectedBody = $"msisdnList=&username={username}&token={token}";
+            var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
+            Assert.Equal(expectedBody, actualBody);
+
+            return new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(await TestSamples.GetCdrPaginatedResponseAsync(), Encoding.UTF8, "text/xml")
+            };
+        });
+
+        var services = new ServiceCollection()
+            .AddThingsMobile(options =>
+            {
+                options.Username = username;
+                options.Token = token;
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => handler)
+            .Services.BuildServiceProvider();
+        var client = services.GetRequiredService<ThingsMobileClient>();
+
+        var response = await client.GetCdrAsync(new List<string>());
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.True(response.IsSuccessful);
+        Assert.NotNull(response.Resource);
+        Assert.Null(response.Error);
+        var cdr = Assert.Single(response.Resource!.CallDetailRecords);
+        Assert.Equal("Zone 1", cdr.Network);
+        Assert.Equal("882360001975037", cdr.Msisdn);
+    }
 }

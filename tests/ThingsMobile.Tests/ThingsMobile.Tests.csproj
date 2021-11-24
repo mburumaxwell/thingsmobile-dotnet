@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Samples\error.xml" />
+    <EmbeddedResource Include="Samples\cdrPaginatedResponse.xml" />
     <EmbeddedResource Include="Samples\simListResponse.xml" />
   </ItemGroup>
 
