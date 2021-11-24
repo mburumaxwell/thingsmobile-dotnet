@@ -31,18 +31,8 @@ namespace ThingsMobile
             this.httpClient = httpClient ?? new HttpClient();
             options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
 
-            if (string.IsNullOrWhiteSpace(options.Username))
-            {
-                throw new ArgumentNullException(nameof(options.Username));
-            }
-
-            if (string.IsNullOrWhiteSpace(options.Token))
-            {
-                throw new ArgumentNullException(nameof(options.Token));
-            }
-
             // set the base address
-            this.httpClient.BaseAddress = options.Endpoint ?? throw new ArgumentNullException(nameof(options.Endpoint));
+            this.httpClient.BaseAddress = options.Endpoint;
 
             // populate the User-Agent header
             var productVersion = typeof(ThingsMobileClient).Assembly.GetName().Version!.ToString();
