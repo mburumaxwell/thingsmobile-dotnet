@@ -45,10 +45,22 @@ public class CallDetailRecord
     public string? Imsi { get; set; }
 
     /// <summary>
+    /// MSISDN of the user
+    /// </summary>
+    [XmlElement(ElementName = "cdrMsisdn")]
+    public string? Msisdn { get; set; }
+
+    /// <summary>
     /// Network used
     /// </summary>
     [XmlElement(ElementName = "cdrNetwork")]
     public string? Network { get; set; }
+
+    /// <summary>
+    /// Operator used
+    /// </summary>
+    [XmlElement(ElementName = "cdrOperator")]
+    public string? Operator { get; set; }
 
     /// <summary>
     /// Traffic in bytes
