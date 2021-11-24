@@ -55,9 +55,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
                  });
 
-            services.TryAddTransient<ThingsMobileClient>(resolver => resolver.GetRequiredService<InjectableThingsMobileClient>());
-
-            return services.AddHttpClient<InjectableThingsMobileClient>();
+            return services.AddHttpClient<ThingsMobileClient>();
         }
 
         /// <summary>
