@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
 using ThingsMobile;
 
 Console.WriteLine("Hello World!");

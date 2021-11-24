@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ThingsMobile
+﻿namespace ThingsMobile
 {
     /// <summary>
     /// Options for configuring the <see cref="ThingsMobileClient"/>

@@ -1,7 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-
-namespace ThingsMobile.Tests
+﻿namespace ThingsMobile.Tests
 {
     internal static class TestSamples
     {
