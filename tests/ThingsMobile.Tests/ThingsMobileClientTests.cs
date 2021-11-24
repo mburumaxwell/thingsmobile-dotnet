@@ -1,121 +1,118 @@
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
-using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
-namespace ThingsMobile.Tests
+namespace ThingsMobile.Tests;
+
+public class ThingsMobileClientTests
 {
-    public class ThingsMobileClientTests
+    [Fact]
+    public async Task RequestIsSerializedCorrectly()
     {
-        [Fact]
-        public async Task RequestIsSerializedCorrectly()
+        const string username = "username";
+        const string token = "token";
+
+        var handler = new DynamicHttpMessageHandler(async (req, ct) =>
         {
-            const string username = "username";
-            const string token = "token";
+            Assert.Equal(HttpMethod.Post, req.Method);
 
-            var handler = new DynamicHttpMessageHandler(async (req, ct) =>
+            Assert.Null(req.Headers.Authorization);
+
+            Assert.NotNull(req.Headers.UserAgent);
+            var ua = Assert.Single(req.Headers.UserAgent);
+            Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
+
+            Assert.Equal("/services/business-api/simListLite", req.RequestUri?.AbsolutePath);
+            Assert.Empty(req.RequestUri?.Query);
+            Assert.Equal("https://api.thingsmobile.com/services/business-api/simListLite", req.RequestUri?.ToString());
+
+            Assert.NotNull(req.Content);
+            Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
+
+            var expectedBody = $"username={username}&token={token}";
+            var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
+            Assert.Equal(expectedBody, actualBody);
+
+            return new HttpResponseMessage
             {
-                Assert.Equal(HttpMethod.Post, req.Method);
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(await TestSamples.GetSimListResponseAsync(), Encoding.UTF8, "text/xml")
+            };
+        });
 
-                Assert.Null(req.Headers.Authorization);
+        var services = new ServiceCollection()
+            .AddThingsMobile(options =>
+            {
+                options.Username = username;
+                options.Token = token;
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => handler)
+            .Services.BuildServiceProvider();
+        var client = services.GetRequiredService<ThingsMobileClient>();
 
-                Assert.NotNull(req.Headers.UserAgent);
-                var ua = Assert.Single(req.Headers.UserAgent);
-                Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
+        var response = await client.GetSimCardsLiteAsync();
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.True(response.IsSuccessful);
+        Assert.Null(response.Error);
+        Assert.NotNull(response.Resource);
+        Assert.True(response.Resource!.IsSuccess);
+        var sim = Assert.Single(response.Resource.Sims);
+        Assert.Equal("447937557899", sim.Msisdn);
+    }
 
-                Assert.Equal("/services/business-api/simListLite", req.RequestUri?.AbsolutePath);
-                Assert.Empty(req.RequestUri?.Query);
-                Assert.Equal("https://api.thingsmobile.com/services/business-api/simListLite", req.RequestUri?.ToString());
+    [Fact]
+    public async Task ResponseIsDeserializedCorrectly_400()
+    {
+        const string username = "username";
+        const string token = "token";
 
-                Assert.NotNull(req.Content);
-                Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
-
-                var expectedBody = $"username={username}&token={token}";
-                var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
-                Assert.Equal(expectedBody, actualBody);
-
-                return new HttpResponseMessage
-                {
-                    StatusCode = HttpStatusCode.OK,
-                    Content = new StringContent(await TestSamples.GetSimListResponseAsync(), Encoding.UTF8, "text/xml")
-                };
-            });
-
-            var services = new ServiceCollection()
-                .AddThingsMobile(options =>
-                {
-                    options.Username = username;
-                    options.Token = token;
-                })
-                .ConfigurePrimaryHttpMessageHandler(() => handler)
-                .Services.BuildServiceProvider();
-            var client = services.GetRequiredService<ThingsMobileClient>();
-
-            var response = await client.GetSimCardsLiteAsync();
-            Assert.NotNull(response);
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-            Assert.True(response.IsSuccessful);
-            Assert.Null(response.Error);
-            Assert.NotNull(response.Resource);
-            Assert.True(response.Resource!.IsSuccess);
-            var sim = Assert.Single(response.Resource.Sims);
-            Assert.Equal("447937557899", sim.Msisdn);
-        }
-
-        [Fact]
-        public async Task ResponseIsDeserializedCorrectly_400()
+        var handler = new DynamicHttpMessageHandler(async (req, ct) =>
         {
-            const string username = "username";
-            const string token = "token";
+            Assert.Equal(HttpMethod.Post, req.Method);
 
-            var handler = new DynamicHttpMessageHandler(async (req, ct) =>
+            Assert.Null(req.Headers.Authorization);
+
+            Assert.NotNull(req.Headers.UserAgent);
+            var ua = Assert.Single(req.Headers.UserAgent);
+            Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
+
+            Assert.Equal("/services/business-api/simListLite", req.RequestUri?.AbsolutePath);
+            Assert.Empty(req.RequestUri?.Query);
+
+            Assert.NotNull(req.Content);
+            Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
+
+            var expectedBody = $"username={username}&token={token}";
+            var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
+            Assert.Equal(expectedBody, actualBody);
+
+            return new HttpResponseMessage
             {
-                Assert.Equal(HttpMethod.Post, req.Method);
+                StatusCode = HttpStatusCode.BadRequest,
+                Content = new StringContent(await TestSamples.GetErrorAsync(), Encoding.UTF8, "text/xml")
+            };
+        });
 
-                Assert.Null(req.Headers.Authorization);
+        var services = new ServiceCollection()
+            .AddThingsMobile(options =>
+            {
+                options.Username = username;
+                options.Token = token;
+            })
+            .ConfigurePrimaryHttpMessageHandler(() => handler)
+            .Services.BuildServiceProvider();
+        var client = services.GetRequiredService<ThingsMobileClient>();
 
-                Assert.NotNull(req.Headers.UserAgent);
-                var ua = Assert.Single(req.Headers.UserAgent);
-                Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
-
-                Assert.Equal("/services/business-api/simListLite", req.RequestUri?.AbsolutePath);
-                Assert.Empty(req.RequestUri?.Query);
-
-                Assert.NotNull(req.Content);
-                Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
-
-                var expectedBody = $"username={username}&token={token}";
-                var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
-                Assert.Equal(expectedBody, actualBody);
-
-                return new HttpResponseMessage
-                {
-                    StatusCode = HttpStatusCode.BadRequest,
-                    Content = new StringContent(await TestSamples.GetErrorAsync(), Encoding.UTF8, "text/xml")
-                };
-            });
-
-            var services = new ServiceCollection()
-                .AddThingsMobile(options =>
-                {
-                    options.Username = username;
-                    options.Token = token;
-                })
-                .ConfigurePrimaryHttpMessageHandler(() => handler)
-                .Services.BuildServiceProvider();
-            var client = services.GetRequiredService<ThingsMobileClient>();
-
-            var response = await client.GetSimCardsLiteAsync();
-            Assert.NotNull(response);
-            Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.False(response.IsSuccessful);
-            Assert.Null(response.Resource);
-            Assert.NotNull(response.Error);
-            Assert.False(response.Error!.IsSuccess);
-            Assert.Equal("1", response.Error.Code);
-            Assert.Equal("Error description", response.Error.Description);
-        }
+        var response = await client.GetSimCardsLiteAsync();
+        Assert.NotNull(response);
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        Assert.False(response.IsSuccessful);
+        Assert.Null(response.Resource);
+        Assert.NotNull(response.Error);
+        Assert.False(response.Error!.IsSuccess);
+        Assert.Equal("1", response.Error.Code);
+        Assert.Equal("Error description", response.Error.Description);
     }
 }

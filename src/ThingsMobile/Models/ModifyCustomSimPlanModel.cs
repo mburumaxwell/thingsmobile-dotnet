@@ -1,13 +1,12 @@
-﻿namespace ThingsMobile.Models
+﻿namespace ThingsMobile.Models;
+
+/// <summary>
+/// Details required to modify a custom sim plan
+/// </summary>
+public class ModifyCustomSimPlanModel : AddCustomSimPlanModel
 {
     /// <summary>
-    /// Details required to modify a custom sim plan
+    /// Unique identifier for the custom sim plan
     /// </summary>
-    public class ModifyCustomSimPlanModel : AddCustomSimPlanModel
-    {
-        /// <summary>
-        /// Unique identifier for the custom sim plan
-        /// </summary>
-        public string? Id { get; set; }
-    }
+    public string? Id { get; set; }
 }

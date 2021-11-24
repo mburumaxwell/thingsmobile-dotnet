@@ -1,94 +1,92 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System.Linq;
 using Xunit;
 
-namespace ThingsMobile.Tests
+namespace ThingsMobile.Tests;
+
+public class ServiceCollectionExtensionsTests
 {
-    public class ServiceCollectionExtensionsTests
+    [Fact]
+    public void TestAddThingsMobileWithoutApiKey()
     {
-        [Fact]
-        public void TestAddThingsMobileWithoutApiKey()
+        // Arrange
+        var services = new ServiceCollection().AddThingsMobile(options => { }).Services.BuildServiceProvider();
+
+        // Act && Assert
+        Assert.Throws<OptionsValidationException>(() => services.GetRequiredService<ThingsMobileClient>());
+    }
+
+    [Fact]
+    public void TestAddThingsMobileReturnHttpClientBuilder()
+    {
+        // Arrange
+        var collection = new ServiceCollection();
+
+        // Act
+        var builder = collection.AddThingsMobile(options =>
         {
-            // Arrange
-            var services = new ServiceCollection().AddThingsMobile(options => { }).Services.BuildServiceProvider();
+            options.Username = "FAKE_USERNAME";
+            options.Token = "FAKE_TOKEN";
+        });
 
-            // Act && Assert
-            Assert.Throws<OptionsValidationException>(() => services.GetRequiredService<ThingsMobileClient>());
-        }
+        // Assert
+        Assert.NotNull(builder);
+        Assert.IsAssignableFrom<IHttpClientBuilder>(builder);
+    }
 
-        [Fact]
-        public void TestAddThingsMobileReturnHttpClientBuilder()
+    [Fact]
+    public void TestAddThingsMobileRegisteredWithTransientLifeTime()
+    {
+        // Arrange
+        var collection = new ServiceCollection();
+
+        // Act
+        var builder = collection.AddThingsMobile(options =>
         {
-            // Arrange
-            var collection = new ServiceCollection();
+            options.Username = "FAKE_USERNAME";
+            options.Token = "FAKE_TOKEN";
+        });
 
-            // Act
-            var builder = collection.AddThingsMobile(options =>
+        // Assert
+        var serviceDescriptor = collection.FirstOrDefault(x => x.ServiceType == typeof(ThingsMobileClient));
+        Assert.NotNull(serviceDescriptor);
+        Assert.Equal(ServiceLifetime.Transient, serviceDescriptor!.Lifetime);
+    }
+
+    [Fact]
+    public void TestAddThingsMobileCanResolveThingsMobileClientOptions()
+    {
+        // Arrange
+        var services = new ServiceCollection()
+            .AddThingsMobile(options =>
             {
                 options.Username = "FAKE_USERNAME";
                 options.Token = "FAKE_TOKEN";
-            });
+            }).Services.BuildServiceProvider();
 
-            // Assert
-            Assert.NotNull(builder);
-            Assert.IsAssignableFrom<IHttpClientBuilder>(builder);
-        }
+        // Act
+        var thingsMobileClientOptions = services.GetService<IOptions<ThingsMobileClientOptions>>();
 
-        [Fact]
-        public void TestAddThingsMobileRegisteredWithTransientLifeTime()
-        {
-            // Arrange
-            var collection = new ServiceCollection();
+        // Assert
+        Assert.NotNull(thingsMobileClientOptions);
+    }
 
-            // Act
-            var builder = collection.AddThingsMobile(options =>
+    [Fact]
+    public void TestAddThingsMobileCanResolveThingsMobileClient()
+    {
+        // Arrange
+        var services = new ServiceCollection()
+            .AddThingsMobile(options =>
             {
                 options.Username = "FAKE_USERNAME";
                 options.Token = "FAKE_TOKEN";
-            });
+            })
+            .Services.BuildServiceProvider();
 
-            // Assert
-            var serviceDescriptor = collection.FirstOrDefault(x => x.ServiceType == typeof(ThingsMobileClient));
-            Assert.NotNull(serviceDescriptor);
-            Assert.Equal(ServiceLifetime.Transient, serviceDescriptor!.Lifetime);
-        }
+        // Act
+        var thingsMobile = services.GetService<ThingsMobileClient>();
 
-        [Fact]
-        public void TestAddThingsMobileCanResolveThingsMobileClientOptions()
-        {
-            // Arrange
-            var services = new ServiceCollection()
-                .AddThingsMobile(options =>
-                {
-                    options.Username = "FAKE_USERNAME";
-                    options.Token = "FAKE_TOKEN";
-                }).Services.BuildServiceProvider();
-
-            // Act
-            var thingsMobileClientOptions = services.GetService<IOptions<ThingsMobileClientOptions>>();
-
-            // Assert
-            Assert.NotNull(thingsMobileClientOptions);
-        }
-
-        [Fact]
-        public void TestAddThingsMobileCanResolveThingsMobileClient()
-        {
-            // Arrange
-            var services = new ServiceCollection()
-                .AddThingsMobile(options =>
-                {
-                    options.Username = "FAKE_USERNAME";
-                    options.Token = "FAKE_TOKEN";
-                })
-                .Services.BuildServiceProvider();
-
-            // Act
-            var thingsMobile = services.GetService<ThingsMobileClient>();
-
-            // Assert
-            Assert.NotNull(thingsMobile);
-        }
+        // Assert
+        Assert.NotNull(thingsMobile);
     }
 }
