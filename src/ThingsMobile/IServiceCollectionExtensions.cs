@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using ThingsMobile;
@@ -35,25 +35,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 services.Configure(configureOptions);
             }
 
-            services
-                 .PostConfigure<ThingsMobileClientOptions>(o =>
-                 {
-                     if (string.IsNullOrWhiteSpace(o.Username))
-                     {
-                         throw new ArgumentNullException(nameof(o.Username));
-                     }
-
-                     if (string.IsNullOrWhiteSpace(o.Token))
-                     {
-                         throw new ArgumentNullException(nameof(o.Token));
-                     }
-
-                     if (o.Endpoint == null)
-                     {
-                         throw new ArgumentNullException(nameof(o.Endpoint));
-                     }
-
-                 });
+            services.AddSingleton<IValidateOptions<ThingsMobileClientOptions>, ThingsMobileClientValidateOptions>();
 
             return services.AddHttpClient<ThingsMobileClient>();
         }
