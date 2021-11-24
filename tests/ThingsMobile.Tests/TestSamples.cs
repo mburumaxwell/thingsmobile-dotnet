@@ -12,4 +12,5 @@ internal static class TestSamples
 
     public static Task<string> GetErrorAsync() => GetSampleResourceAsStringAsync("error.xml");
     public static Task<string> GetSimListResponseAsync() => GetSampleResourceAsStringAsync("simListResponse.xml");
+    public static Task<string> GetCdrPaginatedResponseAsync() => GetSampleResourceAsStringAsync("cdrPaginatedResponse.xml");
 }
