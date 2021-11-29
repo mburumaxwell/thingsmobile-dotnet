@@ -25,7 +25,7 @@ public class Sim
     /// Date when the SIM card was activated
     /// </summary>
     [XmlIgnore]
-    public DateTime? ActivationDate => !string.IsNullOrWhiteSpace(ActivationDateString) ? DateTime.Parse(ActivationDateString) : (DateTime?)null;
+    public DateTime? ActivationDate => !string.IsNullOrWhiteSpace(ActivationDateString) ? DateTime.Parse(ActivationDateString) : null;
 
     /// <summary>
     /// Balance left on the SIM card
@@ -79,7 +79,7 @@ public class Sim
     /// Expiration date for the SIM
     /// </summary>
     [XmlIgnore]
-    public DateTime? ExpirationDate => !string.IsNullOrWhiteSpace(ExpirationDateString) ? (DateTime?)DateTime.Parse(ExpirationDateString) : null;
+    public DateTime? ExpirationDate => !string.IsNullOrWhiteSpace(ExpirationDateString) ? DateTime.Parse(ExpirationDateString) : null;
 
     /// <summary>
     /// Date when the SIM card was last connected     
@@ -91,7 +91,7 @@ public class Sim
     /// Date when the SIM card was last connected     
     /// </summary>
     [XmlIgnore]
-    public DateTime? LastConnectionDate => !string.IsNullOrWhiteSpace(LastConnectionDateString) ? (DateTime?)DateTime.Parse(LastConnectionDateString) : null;
+    public DateTime? LastConnectionDate => !string.IsNullOrWhiteSpace(LastConnectionDateString) ? DateTime.Parse(LastConnectionDateString) : null;
 
     /// <summary>
     /// The barcode number for the sim card
