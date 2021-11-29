@@ -61,13 +61,13 @@ public class Sim
     /// Daily traffic in bytes
     /// </summary>
     [XmlElement("dailyTraffic")]
-    public int DailyTraffic { get; set; }
+    public long DailyTraffic { get; set; }
 
     /// <summary>
     /// Daily traffic threshold in bytes
     /// </summary>
     [XmlElement("dailyTrafficThreshold")]
-    public int DailyTrafficThreshold { get; set; }
+    public long DailyTrafficThreshold { get; set; }
 
     /// <summary>
     /// Expiration date for the SIM
@@ -103,13 +103,13 @@ public class Sim
     /// Monthly traffic in bytes
     /// </summary>
     [XmlElement("monthlyTraffic")]
-    public int MonthlyTraffic { get; set; }
+    public long MonthlyTraffic { get; set; }
 
     /// <summary>
     /// Monthly traffic threshold in bytes
     /// </summary>
     [XmlElement("monthlyTrafficThreshold")]
-    public int MonthlyTrafficThreshold { get; set; }
+    public long MonthlyTrafficThreshold { get; set; }
 
     /// <summary>
     /// MSISDN of the SIM card
@@ -151,11 +151,11 @@ public class Sim
     /// Total traffic in bytes
     /// </summary>
     [XmlElement("totalTraffic")]
-    public int TotalTraffic { get; set; }
+    public long TotalTraffic { get; set; }
 
     /// <summary>
     /// Total traffic threshold in bytes
     /// </summary>
     [XmlElement("totalTrafficThreshold")]
-    public int TotalTrafficThreshold { get; set; }
+    public long TotalTrafficThreshold { get; set; }
 }
