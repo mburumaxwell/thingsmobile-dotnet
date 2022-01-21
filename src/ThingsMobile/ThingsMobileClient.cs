@@ -20,15 +20,7 @@ public class ThingsMobileClient
     /// </summary>
     /// <param name="options">The options for configuring the client</param>
     public ThingsMobileClient(ThingsMobileClientOptions options)
-        : this(null, options) { }
-
-    /// <summary>
-    /// Creates an instance if <see cref="ThingsMobileClient"/>
-    /// </summary>
-    /// <param name="httpClient"></param>
-    /// <param name="options">The options for configuring the client</param>
-    public ThingsMobileClient(HttpClient? httpClient, ThingsMobileClientOptions options)
-        : this(httpClient, Options.Create(options)) { }
+        : this(null, Options.Create(options)) { }
 
     /// <summary>
     /// Creates an instance if <see cref="ThingsMobileClient"/>
