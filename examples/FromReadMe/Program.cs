@@ -6,7 +6,7 @@ var options = new ThingsMobileClientOptions
     Token = "your-token-here"
 };
 var client = new ThingsMobileClient(options);
-var response = await client.ListSimCardsAsync();
+var response = await client.GetSimCardsLiteAsync();
 var simcards = response.Resource;
 foreach (var sim in simcards.Sims)
 {
