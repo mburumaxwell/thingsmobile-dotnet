@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{8C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ListSimCards", "examples\ListSimCards\ListSimCards.csproj", "{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FromReadMe", "examples\FromReadMe\FromReadMe.csproj", "{D8B32617-AD40-476C-B0B0-763009BDE15C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8B32617-AD40-476C-B0B0-763009BDE15C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8B32617-AD40-476C-B0B0-763009BDE15C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8B32617-AD40-476C-B0B0-763009BDE15C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8B32617-AD40-476C-B0B0-763009BDE15C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +47,7 @@ Global
 		{AF273EDF-06C8-4700-8366-BECFD10F4B29} = {E03BEF1E-99ED-4027-88DC-A026D651DB31}
 		{92B9D411-332A-497F-86AD-3E2775519931} = {4B16D50E-9572-4078-A688-2984898D5ACB}
 		{2BCFB958-EA01-4F4A-8EDA-C852DF3B6AE6} = {8C441046-AE9D-4C58-9DF2-7C9CCC94D7CE}
+		{D8B32617-AD40-476C-B0B0-763009BDE15C} = {8C441046-AE9D-4C58-9DF2-7C9CCC94D7CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CB35B80E-CD1F-4BB8-81B7-C36F3FC712C7}
