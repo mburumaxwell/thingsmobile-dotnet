@@ -202,13 +202,36 @@ public class ThingsMobileClient
     }
 
     /// <summary>
-    /// Retrieve credit details for the user
+    /// Get the credit of a user.
     /// </summary>
+    /// <param name="start">Start date of the range</param>
+    /// <param name="end">End date of the range</param>
+    /// <param name="page">page number for SIM's CDR</param>
+    /// <param name="pageSize">CDR number per page</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
     /// <returns></returns>
-    public async Task<ThingsMobileResponse<Credit>> GetCreditDetailsAsync(CancellationToken cancellationToken = default)
+    /// <remarks>
+    /// With this API you can get a maximum of 5000 credit history’s operation. If the amount of
+    /// operation is greater you will be notified with an error so you can retry with a more restrictive
+    /// value for page and pageSize or date range.
+    /// <br/>
+    /// For this API there is an API call limit. You can make an API call after at least 5 second from
+    /// your last credit API call.
+    /// </remarks>
+    public async Task<ThingsMobileResponse<Credit>> GetCreditDetailsAsync(DateTimeOffset? start = null,
+                                                                          DateTimeOffset? end = null,
+                                                                          int? page = null,
+                                                                          int? pageSize = null,
+                                                                          CancellationToken cancellationToken = default)
     {
-        return await PostAsync<Credit>("/services/business-api/credit", cancellationToken: cancellationToken);
+        var parameters = new Dictionary<string, string?>();
+
+        if (start is not null) parameters["startDateRange"] = start.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        if (end is not null) parameters["endDateRange"] = end.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        if (page is not null) parameters["page"] = page.Value.ToString();
+        if (pageSize is not null) parameters["pageSize"] = Math.Min(pageSize.Value, 500).ToString();
+
+        return await PostAsync<Credit>("/services/business-api/credit", parameters, cancellationToken);
     }
 
     /// <summary>
