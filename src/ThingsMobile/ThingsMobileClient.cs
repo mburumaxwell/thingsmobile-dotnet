@@ -182,12 +182,22 @@ public class ThingsMobileClient
     /// </summary>
     /// <param name="name">Name of the sim</param>
     /// <param name="tag">Tag of the sim</param>
+    /// <param name="status">
+    /// Status of the SIM visible in the SIM card list or SIM card detail in your Things Mobile portal.
+    /// You can only use one of the following strings to indicate the status of the SIM:
+    /// <c>to-activate</c>, <c>active</c>, <c>suspended</c>, or <c>deactivated</c>.
+    /// </param>
     /// <param name="page">Page number for user’s SIM</param>
     /// <param name="pageSize">SIM number per page, maximum 500</param>>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
+    /// <remarks>
+    /// For this API there is an API call limit. You can make an API call after at least 1 second from
+    /// your last simListLite API call.
+    /// </remarks>
     public async Task<ThingsMobileResponse<SimCollection>> GetSimCardsLiteAsync(string? name = null,
                                                                                 string? tag = null,
+                                                                                string? status = null,
                                                                                 int? page = null,
                                                                                 int? pageSize = null,
                                                                                 CancellationToken cancellationToken = default)
@@ -195,6 +205,7 @@ public class ThingsMobileClient
         var parameters = new Dictionary<string, string?>();
         if (!string.IsNullOrWhiteSpace(name)) parameters["name"] = name;
         if (!string.IsNullOrWhiteSpace(tag)) parameters["tag"] = tag;
+        if (!string.IsNullOrWhiteSpace(tag)) parameters["status"] = status;
         if (page != null) parameters["page"] = page.Value.ToString();
         if (pageSize != null) parameters["pageSize"] = pageSize.Value.ToString();
 
