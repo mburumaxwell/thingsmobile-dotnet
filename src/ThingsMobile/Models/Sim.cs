@@ -58,6 +58,12 @@ public class Sim
     public bool BlockSimTotal { get; set; }
 
     /// <summary>
+    /// The last country where the sim was used
+    /// </summary>
+    [XmlElement("country")]
+    public string? Country { get; set; }
+
+    /// <summary>
     /// Daily traffic in bytes
     /// </summary>
     [XmlElement("dailyTraffic")]
