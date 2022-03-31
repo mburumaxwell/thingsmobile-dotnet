@@ -12,8 +12,8 @@ public class ThingsMobileClient
 {
     private static readonly XmlSerializer errorSerializer = new(typeof(ThingsMobileErrorResponse));
 
-    private readonly ThingsMobileClientOptions options;
     private readonly HttpClient httpClient;
+    private readonly ThingsMobileClientOptions options;
 
     /// <summary>
     /// Creates an instance if <see cref="ThingsMobileClient"/>
@@ -33,7 +33,7 @@ public class ThingsMobileClient
         options = optionsAccessor?.Value ?? throw new ArgumentNullException(nameof(optionsAccessor));
 
         // set the base address
-        this.httpClient.BaseAddress = options.Endpoint;
+        this.httpClient.BaseAddress = options.Endpoint ?? throw new ArgumentNullException(nameof(options.Endpoint));
 
         // populate the User-Agent header
         var productVersion = typeof(ThingsMobileClient).Assembly.GetName().Version!.ToString();
