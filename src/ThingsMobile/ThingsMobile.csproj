@@ -2,9 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net5.0;net6.0</TargetFrameworks>
-    <Description>
-      C# client library and examples for using ThingsMobile's API's to managed IoT SIM cards and data plans.
-    </Description>
+    <Description>.NET client library and examples for using ThingsMobile's API's to managed IoT SIM cards and data plans.</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Deterministic>true</Deterministic>
     <!--<IsPackable>true</IsPackable>-->
