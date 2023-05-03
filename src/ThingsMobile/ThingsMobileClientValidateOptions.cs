@@ -5,7 +5,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 internal class ThingsMobileClientValidateOptions : IValidateOptions<ThingsMobileClientOptions>
 {
-    public ValidateOptionsResult Validate(string name, ThingsMobileClientOptions options)
+    public ValidateOptionsResult Validate(string? name, ThingsMobileClientOptions options)
     {
         if (string.IsNullOrWhiteSpace(options.Username))
         {

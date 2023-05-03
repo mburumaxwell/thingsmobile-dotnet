@@ -24,7 +24,8 @@ public class ThingsMobileClientTests
             Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
             Assert.Equal("/services/business-api/simListLite", req.RequestUri?.AbsolutePath);
-            Assert.Empty(req.RequestUri?.Query);
+            Assert.NotNull(req.RequestUri?.Query);
+            Assert.Empty(req.RequestUri.Query);
             Assert.Equal("https://api.thingsmobile.com/services/business-api/simListLite", req.RequestUri?.ToString());
 
             Assert.NotNull(req.Content);
@@ -58,6 +59,7 @@ public class ThingsMobileClientTests
         Assert.Null(response.Error);
         Assert.NotNull(response.Resource);
         Assert.True(response.Resource!.IsSuccess);
+        Assert.NotNull(response.Resource.Sims);
         var sim = Assert.Single(response.Resource.Sims);
         Assert.Equal("447937557899", sim.Msisdn);
     }
@@ -79,7 +81,8 @@ public class ThingsMobileClientTests
             Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
             Assert.Equal("/services/business-api/simListLite", req.RequestUri?.AbsolutePath);
-            Assert.Empty(req.RequestUri?.Query);
+            Assert.NotNull(req.RequestUri?.Query);
+            Assert.Empty(req.RequestUri.Query);
 
             Assert.NotNull(req.Content);
             Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
@@ -133,7 +136,8 @@ public class ThingsMobileClientTests
             Assert.StartsWith("thingsmobile-dotnet/", ua.ToString());
 
             Assert.Equal("/services/business-api/getCdrPaginated", req.RequestUri?.AbsolutePath);
-            Assert.Empty(req.RequestUri?.Query);
+            Assert.NotNull(req.RequestUri?.Query);
+            Assert.Empty(req.RequestUri.Query);
 
             Assert.NotNull(req.Content);
             Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
@@ -165,7 +169,8 @@ public class ThingsMobileClientTests
         Assert.True(response.IsSuccessful);
         Assert.NotNull(response.Resource);
         Assert.Null(response.Error);
-        var cdr = Assert.Single(response.Resource!.CallDetailRecords);
+        Assert.NotNull(response.Resource?.CallDetailRecords);
+        var cdr = Assert.Single(response.Resource.CallDetailRecords);
         Assert.Equal("Zone 1", cdr.Network);
         Assert.Equal("882360001975037", cdr.Msisdn);
     }
