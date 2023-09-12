@@ -10,7 +10,7 @@ The ThingsMobile dotnet NuGet package makes it easier to use the ThingsMobile AP
 
 The documentation that this Client is built on is available for download on the ThingsMobile portal [https://www.thingsmobile.com/portal?action=downloadApiDocument](https://www.thingsmobile.com/portal?action=downloadApiDocument).
 
-> This library currently supports **v1.41 (2023-04-26)**
+> This library currently supports **v1.42 (2023-08-03)**
 
 ### Installation
 
