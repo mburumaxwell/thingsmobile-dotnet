@@ -39,6 +39,7 @@ jobs:
 
     - name: Determine Version
       uses: gittools/actions/gitversion/execute@v0
+      id: gitversion
 
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
@@ -53,6 +54,7 @@ jobs:
         dotnet build
         --configuration Release
         --no-restore
+        -p:VersionPrefix=${{ steps.gitversion.outputs.nuGetVersion }}
 
     - name: Test
       run: >
@@ -67,9 +69,8 @@ jobs:
         dotnet pack
         --configuration Release
         --no-build
-        --verbosity Detailed
-        --output $GITHUB_WORKSPACE/drop
-        -p:PackageVersion=$GITVERSION_NUGETVERSION
+        --output ${{ github.workspace }}/drop
+        -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersion }}
 
     - name: Publish Artifact
       uses: actions/upload-artifact@v4
