@@ -163,7 +163,7 @@ public class ThingsMobileClientTests
             .Services.BuildServiceProvider();
         var client = services.GetRequiredService<ThingsMobileClient>();
 
-        var response = await client.GetCdrAsync(new List<string>(), cancellationToken: TestContext.Current.CancellationToken);
+        var response = await client.GetCdrAsync([], cancellationToken: TestContext.Current.CancellationToken);
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.True(response.IsSuccessful);

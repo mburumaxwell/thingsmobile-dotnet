@@ -518,7 +518,7 @@ public class ThingsMobileClient
         where T : BaseResponseModel
     {
         // ensure there are parameters
-        parameters ??= new Dictionary<string, string?>();
+        parameters ??= [];
 
         // add authentication parameters
         parameters.Add("username", options.Username);
