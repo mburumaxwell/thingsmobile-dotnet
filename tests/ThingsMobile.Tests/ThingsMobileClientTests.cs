@@ -29,7 +29,7 @@ public class ThingsMobileClientTests
             Assert.Equal("https://api.thingsmobile.com/services/business-api/simListLite", req.RequestUri?.ToString());
 
             Assert.NotNull(req.Content);
-            Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
+            Assert.IsType<FormUrlEncodedContent>(req.Content, exactMatch: false);
 
             var expectedBody = $"username={username}&token={token}";
             var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
@@ -85,7 +85,7 @@ public class ThingsMobileClientTests
             Assert.Empty(req.RequestUri.Query);
 
             Assert.NotNull(req.Content);
-            Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
+            Assert.IsType<FormUrlEncodedContent>(req.Content, exactMatch: false);
 
             var expectedBody = $"username={username}&token={token}";
             var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
@@ -140,7 +140,7 @@ public class ThingsMobileClientTests
             Assert.Empty(req.RequestUri.Query);
 
             Assert.NotNull(req.Content);
-            Assert.IsAssignableFrom<FormUrlEncodedContent>(req.Content);
+            Assert.IsType<FormUrlEncodedContent>(req.Content, exactMatch: false);
 
             var expectedBody = $"msisdnList=&username={username}&token={token}";
             var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));

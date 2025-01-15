@@ -31,7 +31,7 @@ public class ServiceCollectionExtensionsTests
 
         // Assert
         Assert.NotNull(builder);
-        Assert.IsAssignableFrom<IHttpClientBuilder>(builder);
+        Assert.IsType<IHttpClientBuilder>(builder, exactMatch: false);
     }
 
     [Fact]
