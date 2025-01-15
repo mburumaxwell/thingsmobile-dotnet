@@ -6,11 +6,11 @@
 
 ThingsMobile makes it easy to maintain SIM cards and their data plans/usage all over the world. More about ThingsMobile on the [website](https://thingsmobile.com).
 
-The ThingsMobile dotnet NuGet package makes it easier to use the ThingsMobile API from your dotnet projects (netstandard2.0+) projects without having to build your own API calls. You can get your free API token at [https://www.thingsmobile.com/portal?step=api](https://www.thingsmobile.com/portal?step=api).
+The ThingsMobile dotnet NuGet package makes it easier to use the ThingsMobile API from your dotnet projects (netstandard2.0+) projects without having to build your own API calls. You can get your free API token at <https://www.thingsmobile.com/portal?step=api>.
 
-The documentation that this Client is built on is available for download on the ThingsMobile portal [https://www.thingsmobile.com/portal?action=downloadApiDocument](https://www.thingsmobile.com/portal?action=downloadApiDocument).
+The documentation that this Client is built on is available for download on the ThingsMobile portal <https://www.thingsmobile.com/portal?action=downloadApiDocument&uid=135421>.
 
-> This library currently supports **v1.42 (2023-08-03)**
+> This library currently supports **v1.49 (2024-11-22)**
 
 ### Installation
 
