@@ -39,12 +39,6 @@ public class CallDetailRecord
     public DateTime? EndDate => string.IsNullOrWhiteSpace(EndDateString) ? null : DateTime.Parse(EndDateString);
 
     /// <summary>
-    /// International mobile subscriber identity used to identify the user of a cellular network
-    /// </summary>
-    [XmlElement(ElementName = "cdrImsi")]
-    public string? Imsi { get; set; }
-
-    /// <summary>
     /// MSISDN of the user
     /// </summary>
     [XmlElement(ElementName = "cdrMsisdn")]
