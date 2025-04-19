@@ -6,7 +6,7 @@ namespace ThingsMobile;
 /// <summary>
 /// Things Mobile API Response
 /// </summary>
-/// <typeparam name="T"></typeparam>
+/// <typeparam name="T">Type of the inner response</typeparam>
 public class ThingsMobileResponse<T> where T : BaseResponseModel
 {
     /// <summary>

@@ -25,7 +25,7 @@ public class ThingsMobileClient
     /// <summary>
     /// Creates an instance if <see cref="ThingsMobileClient"/>
     /// </summary>
-    /// <param name="httpClient"></param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> for making the requests.</param>
     /// <param name="optionsAccessor">The options for configuring the client</param>
     public ThingsMobileClient(HttpClient? httpClient, IOptions<ThingsMobileClientOptions> optionsAccessor)
     {
@@ -47,7 +47,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN of the sim card</param>
     /// <param name="barcode">Sim barcode number (19/20 digits long)</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> ActivateSimCardAsync(string msisdn,
                                                                                     string barcode,
                                                                                     CancellationToken cancellationToken = default)
@@ -67,7 +66,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> BlockSimCardAsync(string? msisdn = null,
                                                                                  string? iccid = null,
                                                                                  CancellationToken cancellationToken = default)
@@ -87,7 +85,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> DisconnectSimCardAsync(string? msisdn = null,
                                                                                       string? iccid = null,
                                                                                       CancellationToken cancellationToken = default)
@@ -106,7 +103,6 @@ public class ThingsMobileClient
     /// </summary>
     /// <param name="modifyCustomSimPlan">Details for the sim plan modifications</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> ModifyCustomSimPlanAsync(ModifyCustomSimPlanModel modifyCustomSimPlan,
                                                                                         CancellationToken cancellationToken = default)
     {
@@ -127,7 +123,6 @@ public class ThingsMobileClient
     /// </summary>
     /// <param name="simPlanModel">Details of the custom sim plan</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> CreateCustomSimPlanAsync(AddCustomSimPlanModel simPlanModel,
                                                                                         CancellationToken cancellationToken = default)
     {
@@ -146,7 +141,6 @@ public class ThingsMobileClient
     /// Gets all sim cards
     /// </summary>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     [Obsolete("Use the 'GetSimCardsLiteAsync' method instead")]
     public async Task<ThingsMobileResponse<SimCollection>> ListSimCardsAsync(CancellationToken cancellationToken = default)
     {
@@ -161,7 +155,6 @@ public class ThingsMobileClient
     /// <param name="page">Page number for SIM CDRs</param>
     /// <param name="pageSize">CDR number for page, maximum 2,000</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<SimCollection>> GetSimCardAsync(string? msisdn = null,
                                                                            string? iccid = null,
                                                                            int? page = null,
@@ -189,8 +182,7 @@ public class ThingsMobileClient
     /// </param>
     /// <param name="page">Page number for user’s SIM</param>
     /// <param name="pageSize">SIM number per page, maximum 500</param>>
-    /// <param name="cancellationToken"></param>
-    /// <returns></returns>
+    /// <param name="cancellationToken">The token for cancelling the task</param>
     /// <remarks>
     /// For this API there is an API call limit. You can make an API call after at least 1 second from
     /// your last simListLite API call.
@@ -220,7 +212,6 @@ public class ThingsMobileClient
     /// <param name="page">page number for SIM's CDR</param>
     /// <param name="pageSize">CDR number per page</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     /// <remarks>
     /// With this API you can get a maximum of 5000 credit history’s operation. If the amount of
     /// operation is greater you will be notified with an error so you can retry with a more restrictive
@@ -249,7 +240,6 @@ public class ThingsMobileClient
     /// Get custom sim plan lists
     /// </summary>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<SimPlanCollection>> GetSimPlansAsync(CancellationToken cancellationToken = default)
     {
         return await PostAsync<SimPlanCollection>("/services/business-api/customPlanList", cancellationToken: cancellationToken);
@@ -263,7 +253,6 @@ public class ThingsMobileClient
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="expiryDateString">Date which the sim card expires. Format (yyyy-MM-dd)</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimExpiryDateAsync(string expiryDateString,
                                                                                      bool blockSimAfterExpiry,
                                                                                      string? msisdn = null,
@@ -287,7 +276,6 @@ public class ThingsMobileClient
     /// Sets Sim thresholds
     /// </summary>
     /// <param name="threshold">Details of the thresholds to be set</param>
-    /// <returns></returns>
     /// <param name="cancellationToken">The token for cancelling the task</param>
     public async Task<ThingsMobileResponse<BaseResponseModel>> SetSimThresholdsAsync(SimThreshold threshold,
                                                                                      CancellationToken cancellationToken = default)
@@ -312,7 +300,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> UnblockSimCardAsync(string? msisdn = null,
                                                                                    string? iccid = null,
                                                                                    CancellationToken cancellationToken = default)
@@ -333,7 +320,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimNameAsync(string name,
                                                                                   string? msisdn = null,
                                                                                   string? iccid = null,
@@ -355,7 +341,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> SendSmsToSimAsync(string message,
                                                                                  string? msisdn = null,
                                                                                  string? iccid = null,
@@ -377,7 +362,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the sim card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> ChangeSimPlanAsync(string customPlanId,
                                                                                   string? msisdn = null,
                                                                                   string? iccid = null,
@@ -399,7 +383,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimTagAsync(string tag,
                                                                                  string? msisdn = null,
                                                                                  string? iccid = null,
@@ -421,7 +404,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> RechargeSimAsync(int amount,
                                                                                 string? msisdn = null,
                                                                                 string? iccid = null,
@@ -447,7 +429,6 @@ public class ThingsMobileClient
     /// <param name="start">Start date of the range</param>
     /// <param name="end">End date of the range</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BasicResponse>> DownloadCdrAsync(List<string> msisdnList,
                                                                             DateTimeOffset? start = null,
                                                                             DateTimeOffset? end = null,
@@ -473,7 +454,6 @@ public class ThingsMobileClient
     /// <param name="page">page number for SIM's CDR</param>
     /// <param name="pageSize">CDR number per page</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<CdrPaginated>> GetCdrAsync(List<string> msisdnList,
                                                                       DateTimeOffset? start = null,
                                                                       DateTimeOffset? end = null,
@@ -500,7 +480,6 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
-    /// <returns></returns>
     public async Task<ThingsMobileResponse<BaseResponseModel>> DeactivateSimAsync(string? msisdn = null,
                                                                                   string? iccid = null,
                                                                                   CancellationToken cancellationToken = default)
