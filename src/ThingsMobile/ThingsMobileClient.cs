@@ -345,6 +345,9 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
+    /// <remarks>
+    /// For this API there is an API call limit. You can make an API call after at least 5 seconds from your last API call.
+    /// </remarks>
     public async Task<ThingsMobileResponse<BaseResponseModel>> SendSmsToSimAsync(string message,
                                                                                  string? msisdn = null,
                                                                                  string? iccid = null,
@@ -408,7 +411,7 @@ public class ThingsMobileClient
     /// <summary>
     /// Recharge a sim
     /// </summary>
-    /// <param name="amount">The amount in MB (Mega Bytes)</param>
+    /// <param name="amount">The amount in MB (Mega Bytes), maximum value in MB: 1000</param>
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
@@ -437,6 +440,10 @@ public class ThingsMobileClient
     /// <param name="start">Start date of the range</param>
     /// <param name="end">End date of the range</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
+    /// <remarks>
+    /// With this API you can export a maximum of 200,000 CDR.
+    /// If the amount of CDR is greater you will be notified with an error so you can retry with a more restrictive range of data.
+    /// </remarks>
     public async Task<ThingsMobileResponse<BasicResponse>> DownloadCdrAsync(List<string> msisdnList,
                                                                             DateTimeOffset? start = null,
                                                                             DateTimeOffset? end = null,
@@ -462,6 +469,13 @@ public class ThingsMobileClient
     /// <param name="page">page number for SIM's CDR</param>
     /// <param name="pageSize">CDR number per page</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
+    /// <remarks>
+    /// With this API you can get a maximum of 10,000 CDR.
+    /// If the amount of CDR is greater you will be notified with an error so you can retry with a more restrictive value
+    /// for <paramref name="page"/> and <paramref name="pageSize"/> or <paramref name="start"/> and <paramref name="end"/>.
+    /// <br/>
+    /// For this API there is an API call limit. You can make an API call after at least 5 seconds from your last API call.
+    /// </remarks>
     public async Task<ThingsMobileResponse<CdrPaginated>> GetCdrAsync(List<string> msisdnList,
                                                                       DateTimeOffset? start = null,
                                                                       DateTimeOffset? end = null,
@@ -488,6 +502,10 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
+    /// <remarks>
+    /// This is critical. Needs this:SIM deactivation is final. Once completed, the SIM cannot be activated again.
+    /// If deactivated by mistake, contact support@thingsmobile.com.
+    /// </remarks>
     public async Task<ThingsMobileResponse<BaseResponseModel>> DeactivateSimAsync(string? msisdn = null,
                                                                                   string? iccid = null,
                                                                                   CancellationToken cancellationToken = default)
