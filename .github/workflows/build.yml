@@ -20,6 +20,10 @@ on:
       - CHANGELOG.md
       - docs/**
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   Build:
     runs-on: ubuntu-latest
