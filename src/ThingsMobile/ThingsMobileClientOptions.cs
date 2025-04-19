@@ -18,7 +18,7 @@ public class ThingsMobileClientOptions
     /// <summary>
     /// The endpoint to use for requests.
     /// Defaults to <c>https://api.thingsmobile.com/</c>.
-    /// For test purposes, set this value to <c>https://test.thingsmobile.com/</c>
+    /// For test purposes, set this value to <c>https://test-api.thingsmobile.com/</c>
     /// </summary>
     public Uri Endpoint { get; set; } = new Uri("https://api.thingsmobile.com/");
 
@@ -28,6 +28,6 @@ public class ThingsMobileClientOptions
     {
         Username = "test";
         Token = "Thingsmobil3";
-        Endpoint = new Uri("https://test.thingsmobile.com/");
+        Endpoint = new Uri("https://test-api.thingsmobile.com/");
     }
 }
