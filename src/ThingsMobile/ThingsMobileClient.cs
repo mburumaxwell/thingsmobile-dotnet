@@ -320,6 +320,10 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
+    /// <remarks>
+    /// For this API there is a daily API call limit. You can call this API a maximum number of times
+    /// equal to three times the number of activated SIMs (and not deactivated) daily.
+    /// </remarks>
     public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimNameAsync(string name,
                                                                                   string? msisdn = null,
                                                                                   string? iccid = null,
@@ -383,6 +387,10 @@ public class ThingsMobileClient
     /// <param name="msisdn">MSISDN for the SIM card</param>
     /// <param name="iccid">ICCID for the SIM card</param>
     /// <param name="cancellationToken">The token for cancelling the task</param>
+    /// <remarks>
+    /// For this API there is a daily API call limit. You can call this API a maximum number of times
+    /// equal to three times the number of activated SIMs (and not deactivated) daily.
+    /// </remarks>
     public async Task<ThingsMobileResponse<BaseResponseModel>> UpdateSimTagAsync(string tag,
                                                                                  string? msisdn = null,
                                                                                  string? iccid = null,
