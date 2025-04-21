@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ThingsMobile/ThingsMobile.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/ThingsMobile.Tests/ThingsMobile.Tests.csproj" />
+  </Folder>
+  <Folder Name="/examples/">
+    <Project Path="examples/FromReadMe/FromReadMe.csproj" />
+    <Project Path="examples/ListSimCards/ListSimCards.csproj" />
+  </Folder>
+</Solution>
