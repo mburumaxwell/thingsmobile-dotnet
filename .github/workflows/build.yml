@@ -2,23 +2,21 @@ name: Build and Publish
 
 on:
   push:
-    # branches:
-    #   - main
-    tags:
-      - '*'
+    # branches: [main]
+    tags: ['*']
     paths-ignore:
       - README.md
       - LICENSE
       - CHANGELOG.md
       - docs/**
   pull_request:
-    branches:
-      - main
+    branches: [main]
     paths-ignore:
       - README.md
       - LICENSE
       - CHANGELOG.md
       - docs/**
+  workflow_dispatch:
 
 permissions:
   contents: read
