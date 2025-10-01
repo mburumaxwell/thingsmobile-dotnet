@@ -78,14 +78,14 @@ jobs:
         name: drop
 
     - name: NuGet login (OIDC → temp API key)
-      if: ${{ github.actor != 'dependabot[bot]' && startsWith(github.ref, 'refs/tags') }}
+      if: ${{ startsWith(github.ref, 'refs/tags') }}
       uses: NuGet/login@v1
       id: login
       with:
         user: ${{ github.repository_owner }}
 
     - name: Publish to NuGet.org
-      if: ${{ github.actor != 'dependabot[bot]' && startsWith(github.ref, 'refs/tags') }}
+      if: ${{ startsWith(github.ref, 'refs/tags') }}
       run: >
         dotnet nuget push "${{ github.workspace }}/drop/*"
         --source "https://api.nuget.org/v3/index.json"
