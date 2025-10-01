@@ -5,29 +5,35 @@
 
 version: 2
 updates:
-- package-ecosystem: "nuget" # See documentation for possible values
-  directory: "/" # Location of package manifests
-  schedule:
-    interval: "monthly"
-    time: "02:00"
-  open-pull-requests-limit: 10
-  groups:
-    microsoft:
-      patterns: ["Microsoft*"]
-      exclude-patterns: ["Microsoft.NET.*"]
-    system:
-      patterns: ["System*"]
-    xunit:
-      patterns: ["Xunit*"]
-  ignore:
-  # Ignore patch updates for some packages
-  - dependency-name: "Microsoft.*"
-    update-types: ["version-update:semver-patch"]
-  - dependency-name: "System.*"
-    update-types: ["version-update:semver-patch"]
-- package-ecosystem: "github-actions" # See documentation for possible values
-  directory: "/" # Location of package manifests
-  schedule:
-    interval: "monthly"
-    time: "02:00"
-  open-pull-requests-limit: 10
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      time: '02:00'
+
+  - package-ecosystem: 'dotnet-sdk'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      time: '02:00'
+
+  - package-ecosystem: 'nuget'
+    directory: '/'
+    schedule:
+      interval: 'monthly'
+      time: '02:00'
+    open-pull-requests-limit: 10
+    groups:
+      microsoft:
+        patterns: ['Microsoft*']
+        exclude-patterns: ['Microsoft.NET.*']
+      system:
+        patterns: ['System*']
+      xunit:
+        patterns: ['Xunit*']
+    ignore:
+      # Ignore patch updates for some packages
+      - dependency-name: 'Microsoft.*'
+        update-types: ['version-update:semver-patch']
+      - dependency-name: 'System.*'
+        update-types: ['version-update:semver-patch']
