@@ -142,7 +142,13 @@ public class ThingsMobileClientTests
             Assert.NotNull(req.Content);
             Assert.IsType<FormUrlEncodedContent>(req.Content, exactMatch: false);
 
-            var expectedBody = $"msisdnList=&username={username}&token={token}";
+            var expectedBody = string.Join("&", [
+                "msisdnList=1234567890",
+                "startDateRange=0001-01-01+00%3A00%3A00",
+                "endDateRange=9999-12-31+23%3A59%3A59",
+                $"username={username}",
+                $"token={token}"
+            ]);
             var actualBody = await (req.Content?.ReadAsStringAsync(ct) ?? Task.FromResult(""));
             Assert.Equal(expectedBody, actualBody);
 
@@ -163,7 +169,10 @@ public class ThingsMobileClientTests
             .Services.BuildServiceProvider();
         var client = services.GetRequiredService<ThingsMobileClient>();
 
-        var response = await client.GetCdrAsync([], cancellationToken: TestContext.Current.CancellationToken);
+        var response = await client.GetCdrAsync(["1234567890"],
+                                                DateTimeOffset.MinValue,
+                                                DateTimeOffset.MaxValue,
+                                                cancellationToken: TestContext.Current.CancellationToken);
         Assert.NotNull(response);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.True(response.IsSuccessful);

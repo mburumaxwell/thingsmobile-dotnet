@@ -445,8 +445,8 @@ public class ThingsMobileClient
     /// If the amount of CDR is greater you will be notified with an error so you can retry with a more restrictive range of data.
     /// </remarks>
     public async Task<ThingsMobileResponse<BasicResponse>> DownloadCdrAsync(List<string> msisdnList,
-                                                                            DateTimeOffset? start = null,
-                                                                            DateTimeOffset? end = null,
+                                                                            DateTimeOffset start,
+                                                                            DateTimeOffset end,
                                                                             CancellationToken cancellationToken = default)
     {
         var parameters = new Dictionary<string, string?>
@@ -454,8 +454,8 @@ public class ThingsMobileClient
             ["msisdnList"] = string.Join(",", msisdnList),
         };
 
-        if (start is not null) parameters["startDateRange"] = start.Value.ToString("yyyy-MM-dd HH:mm:ss");
-        if (end is not null) parameters["endDateRange"] = end.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        parameters["startDateRange"] = start.ToString("yyyy-MM-dd HH:mm:ss");
+        parameters["endDateRange"] = end.ToString("yyyy-MM-dd HH:mm:ss");
 
         return await PostAsync<BasicResponse>("/services/business-api/downloadCdr", parameters, cancellationToken);
     }
@@ -477,8 +477,8 @@ public class ThingsMobileClient
     /// For this API there is an API call limit. You can make an API call after at least 5 seconds from your last API call.
     /// </remarks>
     public async Task<ThingsMobileResponse<CdrPaginated>> GetCdrAsync(List<string> msisdnList,
-                                                                      DateTimeOffset? start = null,
-                                                                      DateTimeOffset? end = null,
+                                                                      DateTimeOffset start,
+                                                                      DateTimeOffset end,
                                                                       int? page = null,
                                                                       int? pageSize = null,
                                                                       CancellationToken cancellationToken = default)
@@ -488,8 +488,8 @@ public class ThingsMobileClient
             ["msisdnList"] = string.Join(",", msisdnList),
         };
 
-        if (start is not null) parameters["startDateRange"] = start.Value.ToString("yyyy-MM-dd HH:mm:ss");
-        if (end is not null) parameters["endDateRange"] = end.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        parameters["startDateRange"] = start.ToString("yyyy-MM-dd HH:mm:ss");
+        parameters["endDateRange"] = end.ToString("yyyy-MM-dd HH:mm:ss");
         if (page is not null) parameters["page"] = page.Value.ToString();
         if (pageSize is not null) parameters["pageSize"] = Math.Min(pageSize.Value, 500).ToString();
 
